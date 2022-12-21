@@ -1,0 +1,129 @@
+body
+{
+    margin: 0;
+    padding-top: 45px;
+    font-family: Arial;
+    background-color: #F6F6F2;
+}
+
+h2
+{
+    color: #378087;
+    font-family: Arial;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+
+
+.header 
+{
+    margin-left: 0px;
+    display: flex;
+    align-items: center;
+    padding: 15px 4% 10px;
+    justify-content: space-between; 
+    transition: all 0.3s ease 0s;
+}
+
+.navbar
+{
+    list-style: none;
+    margin-right: 20px;
+}
+
+.sticky {
+    background-color: #F6F6F2;
+    position: fixed;
+    top: 0;
+    width: 90%;
+    z-index: 99;
+  }
+
+.navbar li
+{
+    text-decoration: none;
+    display: inline-block;
+    padding: 0px 20px;
+    position: relative;
+    transition: all 0.3s ease 0s;
+   
+}
+
+.navbar li a{
+    text-decoration: none;
+    color: #378087;
+    font-weight: bold;
+    transition: all 0.3s ease 0s;
+}
+
+.navbar li a:hover{
+    color: #42bbc6;
+}
+
+.navbar li:hover{
+    transform: translateY(-3px);
+}
+
+
+
+.water{
+    position: relative;
+    place-items: center;
+}
+
+#chart-water
+{
+    padding: 40px;
+}
+
+.gauge-container{
+    max-width: 450px;
+    border: 0px;
+    margin: auto;
+}
+
+.table table{
+    margin: 0 auto;
+}
+
+
+#idr{
+    border: 1px white;
+    border-radius: 10px;
+    text-align: center;
+    color:white;
+    background-color: #378087;
+}
+
+#safe{
+    border: 1px white;
+    border-radius: 10px;
+    text-align: center;
+    color:white;
+    background-color: green; 
+}
+
+#cautionary{
+    border: 1px white;
+    border-radius: 10px;
+    text-align: center;
+    color:white;
+    background-color: yellow; 
+}
+
+#danger{
+    border: 1px white;
+    border-radius: 10px;
+    text-align: center;
+    color:white;
+    background-color: orange; 
+}
+
+#extreme{
+    border: 1px white;
+    border-radius: 10px;
+    text-align: center;
+    color:white;
+    background-color: red; 
+}
