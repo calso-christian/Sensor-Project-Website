@@ -85,8 +85,8 @@ parser.on('data', (temp) => {
     }
     
 });
-*/
 
+*/
 
 var i = 1;                  
 function myLoop() {         
