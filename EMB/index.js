@@ -7,7 +7,7 @@ const schema = require('./schema')
 //express initialization
 const app = express();
 
-
+/*
 //connect to database
 const dbURI = 'mongodb+srv://ArrayFOO:arrayfoo123@arrayfoo.8ncpwbg.mongodb.net/HumTemp?retryWrites=true&w=majority';
 
@@ -27,7 +27,7 @@ async function connect() {
 
 //call function to connect to database
 connect();
-
+*/
 
 //listen to port (localhost:4000)
 var server = app.listen(4000, "0.0.0.0", () => { //Start the server, listening on port 4000.
@@ -42,7 +42,7 @@ var io = require('socket.io')(server);
 app.use(express.static('public')); 
 
 
-
+/*
 //connect serial communication to arduino
 const { SerialPort } = require('serialport'); 
 const { ReadlineParser } = require('@serialport/parser-readline');
@@ -85,10 +85,10 @@ parser.on('data', (temp) => {
     }
     
 });
+*/
 
 
-/*var i = 1;                  
-
+var i = 1;                  
 function myLoop() {         
   setTimeout(function() {   
     const today = new Date();
@@ -110,7 +110,7 @@ function myLoop() {
   }, 2000)
 }
 
-myLoop();  */       
+myLoop();       
 
 //log if there is a connection
 io.on('connection', (socket) => {
