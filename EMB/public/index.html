@@ -1,54 +1,57 @@
 <!DOCTYPE HTML><html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=cFPi08mdEvZrj9NRC3G0zbThlqzCiUETKFZ4QIcArXj56wVk64ppAof25KvB9AwWqlkDcZDl7pG1O1vUs-Cjt35SvTm663Y3niBM9IGWw5gFSC3kyYIPbS267uuNjxIH93OiwSzAtB_KUbO1aHkE_wy-ja6gPMepQzyuZYU5CjPgsh0LbtQEwuCjisBwe_nYH2eyuQ0ngljCscEZmDZoqvFYTyIVliaAyRq1XK2R2f0bclcmH6EZfSAvoCjRYpb5wO8srWzGGMH1-tlMS7bvz_9N6sYzuDWWTdL9H3YduUeYlPZoESxvvwjxacnDl1GQKu3_xtEACPpytWh8B-USDF4b8Qp6PmYtbWfw9usYCAoZ6Fo18VpMokpcFA4FN2xR3Q4UTFomGR5Jt_ESgxIcjAnn0IV2kCiyLF90FdymZj1P_hSo-6MwpjTuFbUR6vcxEw8O0KmGQvAGTBBJ4ITYW3yRyBoGhv5oA2ksUX2IvMAicvSZ6ppqBDZRcn8pNpoj" charset="UTF-8"></script><script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="dist/gauge.min.js"></script>
   <script type="text/javascript" src="gauge.js"> </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   <script type="text/javascript" src="http://localhost:4000/socket.io/socket.io.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="header sticky">
-    <a><div class="dash">Dashboard</div></a>
-    <nav>
-      <ul class="navbar">
-        <li><a href="">Water</a></li>
-        <li><a href="">Temperature</a></li>
-        <li><a href="">Humidity</a></li>
-      </ul>
-    </nav>
-  </div>
-  <h2>Water Sensor Monitoring</h2>
-  <div id="gauge1" class="gauge-container"></div>
 
-  <div class= "table">
-      <table>
-        <tr>
-        <th>Readings</th>
-        <th>Levels</th>
-        </tr>
-        <tr>
-          <td><div id="idr">0 - 199</div></td>
-          <td><div id="safe">Safe levels</div></td>
-        </tr>
-        <tr>
-          <td><div id="idr">200 - 399</div></td>
-          <td><div id="cautionary">Cautionary levels</div></td>
-        </tr>
-        <tr>
-          <td><div id="idr">400 - 599</div></td> 
-          <td><div id="danger">Danger Levels</div></td>
-        </tr>
-        <tr>
-          <td><div id="idr">600 - 700</div></td>
-          <td><div id="extreme">Extreme Levels</div></td>
-        </tr>
-      </table>
+  <ul class="navbar">
+    <li><a href="">Home</a></li>
+    <li><a href="">Contact Us</a></li>
+</ul>
+
+<div class="greetings">
+    <h1>Greetings, Array Foo!</h1>
+    <p>Welcome to your dashboard, you can do anything to check on your home’s condition</p>
+</div>
+
+<div class="gauges">
+  <div class="humidity">
+    <h3>Humidity</h3>
+      <div hcont>
+        <div id="gauge1" class="gauge-container"></div>
+        <img src="logos/humid.png" alt="humidity logo" width="150" height="150" id="hlogo">
+      </div>
+  </div>
+  
+  <div class="temperature">
+    <h3>Temperature</h3>
+      <div tcont>
+        <div id="gauge2" class="gauge-container"></div>
+        <img src="logos/temp.png" alt="temperature logo" width="150" height="150"  id="tlogo">
+      </div>
   </div>
 
   <div class="water">
+    <h3>Water</h3>
+      <div wcont>
+        <div id="gauge3" class="gauge-container"></div>
+        <img src="logos/water.png" alt="water logo" width="180" height="180"  id="wlogo">
+      </div>
+  </div>
+</div>
+
+
+  <div class="graph">
+    <h3>Water</h3>
     <div id="chart-water" class="container"></div>
   </div>
+</div>
 </body>
 <script>
 
@@ -73,16 +76,63 @@ var socket = io.connect('http://localhost:4000'); //connect to server
         }
       },
       label: function(value) {
-        return (Math.round(value * 100) / 100) + "/" + this.max;
+        return (Math.round(value * 100) / 100);
       }
     }
   );
 
-  
+  var gauge2 = Gauge(
+    document.getElementById("gauge2"),
+    {
+      max: 700,
+      dialStartAngle: -90,
+      dialEndAngle: -90.001,
+      value: 0,
+      color: function(value) {
+        if(value < 200) {
+          return "#5ee432";
+        }else if(value < 400) {
+          return "#fffa50";
+        }else if(value < 600) {
+          return "#f7aa38";
+        }else {
+          return "#ef4655";
+        }
+      },
+      label: function(value) {
+        return (Math.round(value * 100) / 100);
+      }
+    }
+  );
+
+  var gauge3 = Gauge(
+    document.getElementById("gauge3"),
+    {
+      max: 700,
+      dialStartAngle: -90,
+      dialEndAngle: -90.001,
+      value: 0,
+      color: function(value) {
+        if(value < 200) {
+          return "#5ee432";
+        }else if(value < 400) {
+          return "#fffa50";
+        }else if(value < 600) {
+          return "#f7aa38";
+        }else {
+          return "#ef4655";
+        }
+      },
+      label: function(value) {
+        return (Math.round(value * 100) / 100);
+      }
+    }
+  );
+
 
 var chartT = new Highcharts.Chart({
   chart:{ renderTo : 'chart-water' },
-  title: { text: 'Water Sensor' },
+  title: { text: '' },
   series: [{
     showInLegend: false,
     data: []
