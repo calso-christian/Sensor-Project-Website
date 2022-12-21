@@ -1,44 +1,19 @@
-body
-{
-    margin: 0;
-    padding-top: 45px;
-    font-family: Arial;
-    background-color: #F6F6F2;
+@font-face {
+    font-family: Secular; 
+    src: url(fonts/SecularOne-Regular.ttf);
 }
 
-h2
-{
-    color: #378087;
-    font-family: Arial;
-    font-size: 2.5rem;
-    text-align: center;
+body{
+    font-family: Secular;
+    font-style: normal;
 }
 
 
-
-.header 
-{
-    margin-left: 0px;
-    display: flex;
-    align-items: center;
-    padding: 15px 4% 10px;
-    justify-content: space-between; 
-    transition: all 0.3s ease 0s;
+.navbar{
+    margin-top:36px;
+    margin-left: 10px;
+    
 }
-
-.navbar
-{
-    list-style: none;
-    margin-right: 20px;
-}
-
-.sticky {
-    background-color: #F6F6F2;
-    position: fixed;
-    top: 0;
-    width: 90%;
-    z-index: 99;
-  }
 
 .navbar li
 {
@@ -46,84 +21,155 @@ h2
     display: inline-block;
     padding: 0px 20px;
     position: relative;
-    transition: all 0.3s ease 0s;
-   
+    transition: all 0.3s ease 0s
 }
 
 .navbar li a{
     text-decoration: none;
-    color: #378087;
-    font-weight: bold;
+    color: #4B36C8;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 44px;
     transition: all 0.3s ease 0s;
 }
 
 .navbar li a:hover{
-    color: #42bbc6;
+    color: #8370F3;
 }
 
 .navbar li:hover{
     transform: translateY(-3px);
 }
 
-
-
-.water{
+.greetings{
     position: relative;
-    place-items: center;
+    left: 72px;
+    background: #8371F3;
+    box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    width: 824px;
+    height: 200px;
+    padding-left: 26px;
+    padding-top: 18px;
+    margin-top: 51px;
+}
+.greetings h1{
+    font-weight: 400;
+    font-size: 50px;
+    color: #fff;
+    line-height: 73px;
+    margin: 0px;
 }
 
-#chart-water
-{
-    padding: 40px;
+.greetings p{
+    font-weight: 400;
+    font-size: 25px;
+    color: #fff;
+    line-height: 36px;
+    margin-bottom: 0px;
 }
 
-.gauge-container{
-    max-width: 450px;
-    border: 0px;
-    margin: auto;
+.gauges{
+    position: relative;
+    left: 72px;
+    padding-top: 12px;
+    display: inline-flex;
 }
 
-.table table{
-    margin: 0 auto;
+.humidity, .temperature, .water{
+    font-size: 25px;
+    width: 421px;
+    height: 269px;
+    color: #fff;
+    background: #C8C0F9;
+    box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-top: 53px;
+    margin-right: 43px;
+    padding-left: 26px;
+    padding-left: 26px;
 }
 
-
-#idr{
-    border: 1px white;
-    border-radius: 10px;
-    text-align: center;
-    color:white;
-    background-color: #378087;
+.gauges h3{
+    font-weight: normal;
+    margin-bottom: 0;
 }
 
-#safe{
-    border: 1px white;
-    border-radius: 10px;
-    text-align: center;
-    color:white;
-    background-color: green; 
-}
+.hcont, .tcont, .wcont{
+    display: inline-grid;
+  }
 
-#cautionary{
-    border: 1px white;
-    border-radius: 10px;
-    text-align: center;
-    color:white;
-    background-color: yellow; 
-}
+#hlogo{
+    position: absolute;
+    margin-left: 30px;
+    margin-top: 15px;
+  }
 
-#danger{
-    border: 1px white;
-    border-radius: 10px;
-    text-align: center;
-    color:white;
-    background-color: orange; 
-}
+#tlogo{
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 40px;
+  }
 
-#extreme{
-    border: 1px white;
-    border-radius: 10px;
-    text-align: center;
-    color:white;
-    background-color: red; 
-}
+#wlogo{
+    position: absolute;
+    margin-left: 20px;
+    margin-bottom: 50px;
+  }
+
+.gauge-container {
+    width: 170px;
+    height: 170px;
+    display: block;
+    float: left;
+    padding: 10px;
+    border-radius: 12px;
+    position: relative;
+  }
+  .gauge-container > .label {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: inline-block;
+    color: rgb(47, 227, 255);;
+    font-family: monospace;
+    font-size: 0.8em;
+    padding: 5px 10px;
+    border-top-right-radius: 12px;
+  }
+  .gauge-container > .gauge .dial {
+    stroke: #ffffff;
+    stroke-width: 13;
+    fill: rgba(0,0,0,0);
+  }
+  .gauge-container > .gauge .value {
+    stroke: #E3A862;
+    stroke-width: 13;
+    fill: rgba(0,0,0,0);
+  }
+  .gauge-container > .gauge .value-text {
+    fill: #4B36C8;
+    font-family: Secular;
+    font-weight: bold;
+    font-size: 30px
+  }
+
+  .hcont img, .tcont img, .wcont img{
+    place-self: center;
+  }
+
+  .graph{
+    margin-top: 53px;
+    width: 1420px;
+    height: 265px;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
+    position: relative;
+    left: 72px;
+  }
+
+  #chart-water{
+    height: 265px;
+    place-self: center;
+  }
