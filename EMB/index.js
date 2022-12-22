@@ -89,32 +89,31 @@ parser.on('data', (temp) => {
     
 });
 */
-
-
-var i = 1;                  
-function myLoop() {         
-  setTimeout(function() {   
+             
+function myLoop(delay) {         
+  setTimeout(() => {   
     const today = new Date();
-        let month = today.getMonth()+1; let day = today.getDate(); let year = today.getFullYear();
-        let hours = today.getHours(); let minute = today.getMinutes(); let seconds = today.getSeconds();
-        let passDate = day+"-"+month+"-"+year;
-        let passTime = hours+":"+minute+":"+seconds;
-        let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
+        let month = today.getMonth() + 1; 
+        let day = today.getDate();
+        let year = today.getFullYear();
+        let hours = today.getHours(); 
+        let minute = today.getMinutes(); 
+        let seconds = today.getSeconds();
+        let passDate = year + "/" + month + "/" + day;
+        let passTime = hours + ":" + String( Number(minute) + delay ) + ":" + seconds;
+        let dt = year + "/" + month + "/" + day + " " + hours + ":" + minute;
 
     
-    var fakeTemp = Math.floor(Math.random()*1000);
-
-    io.sockets.emit('temp', {date: passDate, time: passTime, temp:fakeTemp}); 
-
-    i++;                    
-    if (i < 20) {           
-      myLoop();              
-    }                      
-  }, 2000)
+    let fakeTemp = Math.floor(Math.random()*1000);
+    io.sockets.emit('temp', {date: passDate, time: passTime, temp:fakeTemp});   
+                   
+  }, 800*delay)
 }
 
-myLoop();       
-
+for (let i = 1; i < 20; i++){
+    myLoop(i);
+    i+=1;
+}
 
 
 
