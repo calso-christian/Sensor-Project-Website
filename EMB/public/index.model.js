@@ -30,6 +30,22 @@ let params = {
 
 tf.setBackend('webgl');
 
+socket.on('temp', function(data) {
+    console.log(data.temp);
+    var x = data.time;
+    var y = data.temp;
+
+    gauge1.setValueAnimated(y, 1);
+
+    if(chartT.series[0].data.length > 40) {
+    chartT.series[0].addPoint([x, y], true, true, true);
+  } else {
+    chartT.series[0].addPoint([x, y], true, false, true);
+  }
+  gauge1.setValueAnimated(y, 1);
+
+})
+
 d3.csv("https://raw.githubusercontent.com/CorpuzKB/Gaussian-Process-Regression-using-Armadillo/master/MPPD.csv", function(data){
     let X = [], y = [], i = 0, Database_split = 1;
     for (let val of Object.values(data)) {
