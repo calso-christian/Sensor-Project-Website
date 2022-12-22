@@ -100,12 +100,13 @@ function myLoop(delay) {
         let minute = today.getMinutes(); 
         let seconds = today.getSeconds();
         let passDate = year + "/" + month + "/" + day;
-        let passTime = hours + ":" + String( Number(minute) + delay ) + ":" + seconds;
+        let passTime = hours + ":" + minute + ":" + seconds;
         let dt = year + "/" + month + "/" + day + " " + hours + ":" + minute;
 
+    let fakeTime = hours + ":" + String( 1 + delay ) + ":" + seconds;   
     
-    let fakeTemp = Math.floor(Math.random()*1000);
-    io.sockets.emit('temp', {date: passDate, time: passTime, temp:fakeTemp});   
+    let fakeTemp = Math.floor(Math.random()*50);
+    io.sockets.emit('temp', {date: passDate, time: fakeTime, temp:fakeTemp});   
                    
   }, 800*delay)
 }

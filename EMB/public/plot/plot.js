@@ -1,4 +1,7 @@
-function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='plotDiv'){
+width = 1300;
+height = 630;
+
+function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='chart-temp'){
     X_predict = X_predict.squeeze().arraySync();
     y_std = tf.sqrt(obj.getDiag(y_cov, y_cov.shape[0]));
     let y_UpperCI = tf.squeeze(y_mean.add(tf.mul(y_std, 2))).arraySync();
@@ -10,7 +13,7 @@ function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='
         y: y_train.squeeze().arraySync(),
         line: {color: "rgb(0,100,80)"}, 
         mode: "lines", 
-        name: "Diesel Prices",
+        name: "Temperature",
         line: {
           color: 'rgb(219, 64, 82)',
           width: 3
@@ -22,7 +25,7 @@ function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='
         y: y_mean,
         line: {color: "rgb(0,100,80)"}, 
         mode: "lines", 
-        name: "Mean Prediction",
+        name: "Forecast",
         line: {
           color: 'rgb(55, 128, 191)',
           width: 3
@@ -52,22 +55,22 @@ function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='
       
       let data = [plot_train, plot_predict, UpperCI, LowerCI];
       let layout = {
-        xaxis: { title: "Day"},
+        xaxis: { title: "Minute"},
         yaxis: { title: "Prediction"},  
         title: {
-            text:'Sample Gaussian Process Regression',
+            text:'Temperature Forecast',
             font: {
-              size: 24
+              size: 20
             },
             xref: 'paper',
             x: 0.05,
         },
-        width: 1300,
-        height: 720,
+        width: width,
+        height: height,
 
         xaxis: {
             title: {
-              text: 'Day',
+              text: 'Minute',
               font: {
                 size: 18,
                 color: '#7f7f7f'
@@ -76,7 +79,7 @@ function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='
           },
           yaxis: {
             title: {
-              text: 'PHP',
+              text: '°C',
               font: {
                 size: 18,
                 color: '#7f7f7f'
