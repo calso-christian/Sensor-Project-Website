@@ -35,12 +35,12 @@ socket.on('temp', function(data) {
     var x = data.time;
     var y = data.temp;
 
-/*
+
     if(chartT.series[0].data.length > 40) {
     chartT.series[0].addPoint([x, y], true, true, true);
   } else {
     chartT.series[0].addPoint([x, y], true, false, true);
-  }*/
+  }
   gauge1.setValueAnimated(y, 1);
 
 })
