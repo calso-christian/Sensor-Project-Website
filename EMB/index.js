@@ -1,3 +1,6 @@
+//use environmental files
+require('dotenv').config()
+
 //import files
 const express = require('express');
 const mongoose = require('mongoose');
@@ -7,17 +10,16 @@ const schema = require('./schema')
 //express initialization
 const app = express();
 
+
 /*
 //connect to database
-const dbURI = 'mongodb+srv://ArrayFOO:arrayfoo123@arrayfoo.8ncpwbg.mongodb.net/HumTemp?retryWrites=true&w=majority';
-
 const connectionParams = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }
 async function connect() {
     try {
-        await mongoose.connect(dbURI, connectionParams);
+        await mongoose.connect(process.env.dbURI, connectionParams);
         console.log('Connected to Database');
     }
     catch(err){
@@ -30,8 +32,8 @@ connect();
 */
 
 //listen to port (localhost:4000)
-var server = app.listen(4000, "0.0.0.0", () => { //Start the server, listening on port 4000.
-    console.log("Listening to requests on port 4000...");
+var server = app.listen(process.env.PORT, "0.0.0.0", () => { //Start the server, listening on port 4000.
+    console.log("Listening to requests on port ", process.env.PORT);
 })
 
 //Bind socket.io to our express server.
@@ -40,6 +42,7 @@ var io = require('socket.io')(server);
 
 //Send index.html page on GET /
 app.use(express.static('public')); 
+
 
 
 /*
@@ -85,8 +88,8 @@ parser.on('data', (temp) => {
     }
     
 });
-
 */
+
 
 var i = 1;                  
 function myLoop() {         
@@ -111,6 +114,10 @@ function myLoop() {
 }
 
 myLoop();       
+
+
+
+
 
 //log if there is a connection
 io.on('connection', (socket) => {
