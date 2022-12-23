@@ -44,25 +44,13 @@ class Utils{
         });
     }
 
-    Inverse(X)
+    async Inverse(X)
     {
-        return tf.tidy(() => {
-            let [Xr, Xc] = X.shape;
-            let M = math.zeros(Xr, Xc)._data;
-            var startTime = performance.now();
-
-            M = math.inv(X.arraySync());
-           /* 
-            var startTime = performance.now();
-            var endTime = performance.now();
-            console.log(`Call to doSomething took ${endTime - startTime} milliseconds`);
-            X = math.qr(X.arraySync());
-            for (let i = 0; i < Xc; i++){
-                M[i] = math.usolve(X.R, X.Q[i]);
-            }
-            */
-            M = tf.squeeze(tf.tensor(M));
-            return M;
-        });
+        let [Xr, Xc] = X.shape;
+        let M = math.zeros(Xr, Xc)._data;
+        X = await X.array();
+        M = math.inv(X);
+        M = tf.squeeze(tf.tensor(M));
+        return M;
     }
 }
