@@ -1,175 +1,183 @@
 @font-face {
-    font-family: Secular;
-    src: url(fonts/SecularOne-Regular.ttf);
+  font-family: Secular; 
+  src: url(fonts/SecularOne-Regular.ttf);
 }
 
+
 body{
-    font-family: Secular;
-    font-style: normal;
+  font-family: Secular;
+  font-style: normal;
+  width: 85%; /*if the browser gets too small, this makes sure there is still space*/
+  margin: 0 auto;
 }
 
 
 .navbar{
-    margin-top:36px;
-    margin-left: 10px;
-
+  margin-top:36px;
+  margin-left: 10px;
+  
 }
 
 .navbar li
 {
-    text-decoration: none;
-    display: inline-block;
-    padding: 0px 20px;
-    position: relative;
-    transition: all 0.3s ease 0s
+  text-decoration: none;
+  display: inline-block;
+  padding: 0px 20px;
+  position: relative;
+  transition: all 0.3s ease 0s
 }
 
 .navbar li a{
-    text-decoration: none;
-    color: #4B36C8;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 44px;
-    transition: all 0.3s ease 0s;
+  text-decoration: none;
+  color: #4B36C8;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 44px;
+  transition: all 0.3s ease 0s;
 }
 
 .navbar li a:hover{
-    color: #8370F3;
+  color: #8370F3;
 }
 
 .navbar li:hover{
-    transform: translateY(-3px);
+  transform: translateY(-3px);
 }
 
 .greetings{
-    position: relative;
-    left: 72px;
-    background: #8371F3;
-    box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    width: 824px;
-    height: 200px;
-    padding-left: 26px;
-    padding-top: 18px;
-    margin-top: 51px;
+  position: relative;
+  left: 72px;
+  background: #8371F3;
+  box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  width: 824px;
+  height: 200px;
+  padding-left: 26px;
+  padding-top: 18px;
+  margin-top: 51px;
+  animation: pop 0.3s linear 1;
 }
 .greetings h1{
-    font-weight: 400;
-    font-size: 50px;
-    color: #fff;
-    line-height: 73px;
-    margin: 0px;
+  font-weight: 400;
+  font-size: 50px;
+  color: #fff;
+  line-height: 73px;
+  margin: 0px;
 }
 
 .greetings p{
-    font-weight: 400;
-    font-size: 25px;
-    color: #fff;
-    line-height: 36px;
-    margin-bottom: 0px;
+  font-weight: 400;
+  font-size: 25px;
+  color: #fff;
+  line-height: 36px;
+  margin-bottom: 0px;
 }
 
 .gauges{
-    position: relative;
-    left: 72px;
-    padding-top: 12px;
-    display: inline-flex;
+  position: relative;
+  left: 72px;
+  padding-top: 12px;
+  display: inline-flex;
 }
 
 .humidity, .temperature, .water{
-    font-size: 25px;
-    width: 421px;
-    height: 269px;
-    color: #fff;
-    background: #C8C0F9;
-    box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    margin-top: 53px;
-    margin-right: 43px;
-    padding-left: 26px;
-    padding-left: 26px;
+  font-size: 25px;
+  width: 421px;
+  height: 269px;
+  color: #fff;
+  background: #C8C0F9;
+  box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  margin-top: 53px;
+  margin-right: 43px;
+  padding-left: 26px;
+  padding-left: 26px;
 }
 
 .gauges h3{
-    font-weight: normal;
-    margin-bottom: 0;
+  font-weight: normal;
+  margin-bottom: 0;
 }
 
 .hcont, .tcont, .wcont{
-    display: inline-grid;
-  }
+  display: inline-grid;
+}
 
 #hlogo{
-    position: absolute;
-    margin-left: 30px;
-    margin-top: 15px;
-  }
+  position: absolute;
+  margin-left: 30px;
+  margin-top: 15px;
+}
 
 #tlogo{
-    position: absolute;
-    margin-top: 15px;
-    margin-left: 40px;
-  }
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 40px;
+}
 
 #wlogo{
-    position: absolute;
-    margin-left: 20px;
-    margin-bottom: 50px;
-  }
+  position: absolute;
+  margin-left: 20px;
+  margin-bottom: 50px;
+}
+.gauges :hover{
+  color: #4B36C8;
+  transition: 0.5s;
+}
 
 .gauge-container {
-    width: 170px;
-    height: 170px;
-    display: block;
-    float: left;
-    padding: 10px;
-    border-radius: 12px;
-    position: relative;
-  }
-  .gauge-container > .label {
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: inline-block;
-    color: rgb(47, 227, 255);;
-    font-family: monospace;
-    font-size: 0.8em;
-    padding: 5px 10px;
-    border-top-right-radius: 12px;
-  }
-  .gauge-container > .gauge .dial {
-    stroke: #ffffff;
-    stroke-width: 13;
-    fill: rgba(0,0,0,0);
-  }
-  .gauge-container > .gauge .value {
-    stroke: #E3A862;
-    stroke-width: 13;
-    fill: rgba(0,0,0,0);
-  }
-  .gauge-container > .gauge .value-text {
-    fill: #4B36C8;
-    font-family: Secular;
-    font-weight: bold;
-    font-size: 30px
-  }
+  width: 170px;
+  height: 170px;
+  display: block;
+  float: left;
+  padding: 10px;
+  border-radius: 12px;
+  position: relative;
+}
+.gauge-container > .label {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: inline-block;
+  color: rgb(47, 227, 255);;
+  font-family: monospace;
+  font-size: 0.8em;
+  padding: 5px 10px;
+  border-top-right-radius: 12px;
+}
+.gauge-container > .gauge .dial {
+  stroke: #ffffff;
+  stroke-width: 13;
+  fill: rgba(0,0,0,0);
+}
+.gauge-container > .gauge .value {
+  stroke: #E3A862;
+  stroke-width: 13;
+  fill: rgba(0,0,0,0);
+}
+.gauge-container > .gauge .value-text {
+  fill: #4B36C8;
+  font-family: Secular;
+  font-weight: bold;
+  font-size: 30px
+}
 
-  .hcont img, .tcont img, .wcont img{
-    place-self: center;
-  }
+.hcont img, .tcont img, .wcont img{
+  place-self: center;
+}
 
-  .graph{
-    margin-top: 53px;
-    width: 1420px;
-    height: 265px;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
-    position: relative;
-    left: 72px;
-  }
+.graph{
+  margin-top: 53px;
+  width: 1425px;
+  height: 630px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
+  position: relative;
+  left: 72px;
+}
 
-  #chart-water{
-    height: 265px;
-    place-self: center;
-  }
+#chart-water{
+  height: 265px;
+  place-self: center;
+}

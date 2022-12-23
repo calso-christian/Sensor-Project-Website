@@ -1,20 +1,16 @@
 <!DOCTYPE HTML><html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=cFPi08mdEvZrj9NRC3G0zbThlqzCiUETKFZ4QIcArXj56wVk64ppAof25KvB9AwWqlkDcZDl7pG1O1vUs-Cjt35SvTm663Y3niBM9IGWw5gFSC3kyYIPbS267uuNjxIH93OiwSzAtB_KUbO1aHkE_wy-ja6gPMepQzyuZYU5CjPgsh0LbtQEwuCjisBwe_nYH2eyuQ0ngljCscEZmDZoqvFYTyIVliaAyRq1XK2R2f0bclcmH6EZfSAvoCjRYpb5wO8srWzGGMH1-tlMS7bvz_9N6sYzuDWWTdL9H3YduUeYlPZoESxvvwjxacnDl1GQKu3_xtEACPpytWh8B-USDF4b8Qp6PmYtbWfw9usYCAoZ6Fo18VpMokpcFA4FN2xR3Q4UTFomGR5Jt_ESgxIcjAnn0IV2kCiyLF90FdymZj1P_hSo-6MwpjTuFbUR6vcxEw8O0KmGQvAGTBBJ4ITYW3yRyBoGhv5oA2ksUX2IvMAicvSZ6ppqBDZRcn8pNpoj" charset="UTF-8"></script><script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="dist/gauge.min.js"></script>
-  <script type="text/javascript" src="gauge.js"> </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-  <script type="text/javascript" src="http://localhost:4000/socket.io/socket.io.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <ul class="navbar">
     <li><a href="">Home</a></li>
-    <li><a href="">Contact Us</a></li>
+    <li><a href="">Our Team</a></li>
 </ul>
 
+<div class="wrap">
 <div class="greetings">
     <h1>Greetings, Array Foo!</h1>
     <p>Welcome to your dashboard, you can do anything to check on your home’s condition</p>
@@ -28,7 +24,7 @@
         <img src="logos/humid.png" alt="humidity logo" width="150" height="150" id="hlogo">
       </div>
   </div>
-
+  
   <div class="temperature">
     <h3>Temperature</h3>
       <div tcont>
@@ -47,128 +43,35 @@
 </div>
 
 
+
+  <div class="graph">
+    <div id="chart-temp" class="container"></div>
+  </div>
+</div>
+<!--
   <div class="graph">
     <h3>Water</h3>
     <div id="chart-water" class="container"></div>
   </div>
 </div>
 </body>
-<script>
-
-var socket = io.connect('http://localhost:4000'); //connect to server
-
-  var gauge1 = Gauge(
-    document.getElementById("gauge1"),
-    {
-      max: 700,
-      dialStartAngle: -90,
-      dialEndAngle: -90.001,
-      value: 0,
-      color: function(value) {
-        if(value < 200) {
-          return "#5ee432";
-        }else if(value < 400) {
-          return "#fffa50";
-        }else if(value < 600) {
-          return "#f7aa38";
-        }else {
-          return "#ef4655";
-        }
-      },
-      label: function(value) {
-        return (Math.round(value * 100) / 100);
-      }
-    }
-  );
-
-  var gauge2 = Gauge(
-    document.getElementById("gauge2"),
-    {
-      max: 700,
-      dialStartAngle: -90,
-      dialEndAngle: -90.001,
-      value: 0,
-      color: function(value) {
-        if(value < 200) {
-          return "#5ee432";
-        }else if(value < 400) {
-          return "#fffa50";
-        }else if(value < 600) {
-          return "#f7aa38";
-        }else {
-          return "#ef4655";
-        }
-      },
-      label: function(value) {
-        return (Math.round(value * 100) / 100);
-      }
-    }
-  );
-
-  var gauge3 = Gauge(
-    document.getElementById("gauge3"),
-    {
-      max: 700,
-      dialStartAngle: -90,
-      dialEndAngle: -90.001,
-      value: 0,
-      color: function(value) {
-        if(value < 200) {
-          return "#5ee432";
-        }else if(value < 400) {
-          return "#fffa50";
-        }else if(value < 600) {
-          return "#f7aa38";
-        }else {
-          return "#ef4655";
-        }
-      },
-      label: function(value) {
-        return (Math.round(value * 100) / 100);
-      }
-    }
-  );
+-->
 
 
-var chartT = new Highcharts.Chart({
-  chart:{ renderTo : 'chart-water' },
-  title: { text: '' },
-  series: [{
-    showInLegend: false,
-    data: []
-  }],
-  plotOptions: {
-    line: { animation: false,
-      dataLabels: { enabled: true }
-    },
-    series: { color: '#059e8a' }
-  },
-  xAxis: { title: {text: "Time"}
-  },
-  yAxis: {
-    title: { text: 'Water Level' }
-  },
-  credits: { enabled: false }
-});
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script type="text/javascript" src="gauge.js"> </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+  <script type="text/javascript" src="http://localhost:4000/socket.io/socket.io.js"></script>
+  <script src="index.UI.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.1.0/dist/tf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.16.4.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+  <script src="model//Utils.js"></script>
+  <script src="model//Kernels.js"></script>
+  <script src="model//Gaussian_Process.js"></script>
+  <script src="index.model.js"></script>
+  <script src="plot//plot.js"></script>
 
-
-    socket.on('temp', function(data) {
-        console.log(data.temp);
-        var x = data.time;
-        var y = data.temp;
-
-        gauge1.setValueAnimated(y, 1);
-
-        if(chartT.series[0].data.length > 40) {
-        chartT.series[0].addPoint([x, y], true, true, true);
-      } else {
-        chartT.series[0].addPoint([x, y], true, false, true);
-      }
-      gauge1.setValueAnimated(y, 1);
-
-    })
-
-
-
-</script>
 </html>
