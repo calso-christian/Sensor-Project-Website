@@ -42,14 +42,6 @@ tf.setBackend('webgl');
 
 })*/
 
-Sensor_temp = {
-    X: {
-        date: [],
-        feature: []
-    },
-    y: [],
-}
-
 socket.on('temp', async function(data) {
     if (data[0].X.date?.[1]){
         forecast(data[0]).then(()=>{
