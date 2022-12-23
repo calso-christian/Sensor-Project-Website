@@ -1,5 +1,5 @@
 @font-face {
-    font-family: Secular; 
+    font-family: Secular;
     src: url(fonts/SecularOne-Regular.ttf);
 }
 
@@ -12,7 +12,7 @@ body{
 .navbar{
     margin-top:36px;
     margin-left: 10px;
-    
+
 }
 
 .navbar li

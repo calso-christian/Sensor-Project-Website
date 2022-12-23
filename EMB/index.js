@@ -1,3 +1,6 @@
+//use environmental files
+require('dotenv').config()
+
 //import files
 const express = require('express');
 const mongoose = require('mongoose');
@@ -7,17 +10,16 @@ const schema = require('./schema')
 //express initialization
 const app = express();
 
+
 /*
 //connect to database
-const dbURI = 'mongodb+srv://ArrayFOO:arrayfoo123@arrayfoo.8ncpwbg.mongodb.net/HumTemp?retryWrites=true&w=majority';
-
 const connectionParams = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }
 async function connect() {
     try {
-        await mongoose.connect(dbURI, connectionParams);
+        await mongoose.connect(process.env.dbURI, connectionParams);
         console.log('Connected to Database');
     }
     catch(err){
@@ -30,8 +32,8 @@ connect();
 */
 
 //listen to port (localhost:4000)
-var server = app.listen(4000, "0.0.0.0", () => { //Start the server, listening on port 4000.
-    console.log("Listening to requests on port 4000...");
+var server = app.listen(process.env.PORT, "0.0.0.0", () => { //Start the server, listening on port 4000.
+    console.log("Listening to requests on port ", process.env.PORT);
 })
 
 //Bind socket.io to our express server.
@@ -40,6 +42,7 @@ var io = require('socket.io')(server);
 
 //Send index.html page on GET /
 app.use(express.static('public')); 
+
 
 
 /*
@@ -61,8 +64,12 @@ parser.on('data', (temp) => {
     var passHum = obj["Humidity"];
     console.log(obj);
     const today = new Date();
-        let month = today.getMonth()+1; let day = today.getDate(); let year = today.getFullYear();
-        let hours = today.getHours(); let minute = today.getMinutes(); let seconds = today.getSeconds();
+        let month = today.getMonth()+1; 
+        let day = today.getDate(); 
+        let year = today.getFullYear();
+        let hours = today.getHours(); 
+        let minute = today.getMinutes(); 
+        let seconds = today.getSeconds();
         let passDate = day+"-"+month+"-"+year;
         let passTime = hours+":"+minute+":"+seconds;
         let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
@@ -88,31 +95,36 @@ parser.on('data', (temp) => {
 */
 
 
-var i = 1;                  
-function myLoop() {         
-  setTimeout(function() {   
+          
+function myLoop(delay) {         
+  setTimeout(() => {   
     const today = new Date();
-        let month = today.getMonth()+1; let day = today.getDate(); let year = today.getFullYear();
-        let hours = today.getHours(); let minute = today.getMinutes(); let seconds = today.getSeconds();
-        let passDate = day+"-"+month+"-"+year;
-        let passTime = hours+":"+minute+":"+seconds;
-        let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
+        let month = today.getMonth() + 1; 
+        let day = today.getDate();
+        let year = today.getFullYear();
+        let hours = today.getHours(); 
+        let minute = today.getMinutes(); 
+        let seconds = today.getSeconds();
+        let passDate = year + "/" + month + "/" + day;
+        let passTime = hours + ":" + minute + ":" + seconds;
+        let dt = year + "/" + month + "/" + day + " " + hours + ":" + minute;
 
+    let fakeTime = hours + ":" + String( 1 + delay ) + ":" + seconds;   
     
-    var fakeTemp = Math.floor(Math.random()*1000);
-
-    io.sockets.emit('temp', {date: passDate, time: passTime, temp:fakeTemp}); 
-
-    i++;                    
-    if (i < 20) {           
-      myLoop();              
-    }                      
-  }, 2000)
+    let fakeTemp = Math.floor(Math.random()*50);
+    io.sockets.emit('temp', {date: passDate, time: fakeTime, temp:fakeTemp});   
+                   
+  }, 2000*delay)
 }
 
-myLoop();       
+
+
 
 //log if there is a connection
 io.on('connection', (socket) => {
     console.log(`Someone connected " ${socket}`); //show a log as a new client connects.
+    for (let i = 1; i < 20; i++){
+        myLoop(i);
+    }
+    
 }) 
