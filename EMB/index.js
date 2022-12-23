@@ -64,8 +64,12 @@ parser.on('data', (temp) => {
     var passHum = obj["Humidity"];
     console.log(obj);
     const today = new Date();
-        let month = today.getMonth()+1; let day = today.getDate(); let year = today.getFullYear();
-        let hours = today.getHours(); let minute = today.getMinutes(); let seconds = today.getSeconds();
+        let month = today.getMonth()+1; 
+        let day = today.getDate(); 
+        let year = today.getFullYear();
+        let hours = today.getHours(); 
+        let minute = today.getMinutes(); 
+        let seconds = today.getSeconds();
         let passDate = day+"-"+month+"-"+year;
         let passTime = hours+":"+minute+":"+seconds;
         let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
@@ -89,7 +93,9 @@ parser.on('data', (temp) => {
     
 });
 */
-             
+
+
+          
 function myLoop(delay) {         
   setTimeout(() => {   
     const today = new Date();
