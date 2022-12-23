@@ -57,27 +57,18 @@ Sensor_temp = {
 }
 
 socket.on('temp', async function(data) {
-    Sensor_temp.X.date.push(data.date + " " + data.time);
-    Sensor_temp.y.push(data.temp);
-    if (Sensor_temp.X.date?.[1]){
-        let date_0 = Sensor_temp.X.date[0];
-        let date_T = data.date + " " + data.time;
-        Sensor_temp.X.feature.push( Math.floor((Math.abs(new Date(date_0) - new Date(date_T))/1000)/60));
-        forecast().then(()=>{
-            gauge2.setValueAnimated(data.temp, 1);
+    if (data[0].X.date?.[1]){
+        forecast(data[0]).then(()=>{
+            gauge2.setValueAnimated(data[1], 1);
         });
     }
-    else{
-        Sensor_temp.X.feature.push(0);
-    }
-
 })
 
-async function forecast(){
+async function forecast(data){
     let points = 1000;
-    let X_train = tf.tensor(Sensor_temp.X.feature).reshape([-1, 1]);
-    let y_train = tf.tensor(Sensor_temp.y).reshape([-1, 1]);
-    let X_predict = tf.linspace(0, Sensor_temp.X.feature[Sensor_temp.X.feature.length - 1] + 15, points).reshape([-1,1]);
+    let X_train = tf.tensor(data.X.feature).reshape([-1, 1]);
+    let y_train = tf.tensor(data.y).reshape([-1, 1]);
+    let X_predict = tf.linspace(0, data.X.feature[data.X.feature.length - 1] + 15, points).reshape([-1,1]);
     let obj = new GaussianProcessRegression(params);
     [y_mean, y_cov] = await obj.Condition(X_predict, X_train, y_train);
     await plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov);
