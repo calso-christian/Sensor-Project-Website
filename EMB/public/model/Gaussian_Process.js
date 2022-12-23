@@ -24,8 +24,7 @@ class GaussianProcessRegression extends Kernels{
     {
         let [K_XX, K_XN, K_NN] = [this.Kernel(X, X), this.Kernel(X, N), this.Kernel(N, N)];
         let I = await this.Inverse(tf.add(K_XX, tf.eye(K_XX.shape[1], K_XX.shape[0]).mul(this.noise)));
-        let K = await tf.transpose(K_XN).matMul(I);
-        //let K = this.Inverse(tf.transpose(K_XN), tf.add(K_XX, tf.eye(K_XX.shape[1], K_XX.shape[0]).mul(this.noise)));
+        let K = tf.transpose(K_XN).matMul(I);
         return [K.matMul(y), K_NN.sub(K.matMul(K_XN))];
     }
 }

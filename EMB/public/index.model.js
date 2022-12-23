@@ -31,18 +31,17 @@ let params = {
 tf.setBackend('webgl');
 
 
-socket.on('temp', function(data) {
+/*socket.on('temp', function(data) {
     var x = data.time;
     var y = data.temp;
-    /*
+    
     if(chartT.series[0].data.length > 40) {
     chartT.series[0].addPoint([x, y], true, true, true);
   } else {
     chartT.series[0].addPoint([x, y], true, false, true);
-  }*/
-  gauge1.setValueAnimated(y, 1);
+  }
 
-})
+})*/
 
 Sensor_temp = {
     X: {
@@ -64,6 +63,7 @@ socket.on('temp', async function(data) {
     else{
         Sensor_temp.X.feature.push(0);
     }
+    gauge2.setValueAnimated(data.temp, 1);
 })
 
 async function forecast(){

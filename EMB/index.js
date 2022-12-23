@@ -117,7 +117,7 @@ function myLoop(delay) {
   }, 800*delay)
 }
 
-for (let i = 1; i < 20; i++){
+for (let i = 1; i < 50; i++){
     myLoop(i);
     i+=1;
 }
