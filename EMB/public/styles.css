@@ -56,6 +56,7 @@ body{
   padding-left: 26px;
   padding-top: 18px;
   margin-top: 51px;
+  transition: all 0.3s ease 0s;
   animation: pop 0.3s linear 1;
 }
 .greetings h1{
@@ -180,4 +181,11 @@ body{
 #chart-water{
   height: 265px;
   place-self: center;
+}
+
+.gcont{
+  transition: all 0.3s ease 0s;
+}
+.greetings:hover, .gcont:hover{
+  transform: translateY(-10px);
 }
