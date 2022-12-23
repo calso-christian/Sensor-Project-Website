@@ -5,24 +5,29 @@ let params = {
     }, 
     RQ_params: {
         'amplitude': Math.exp(-0.455801576),
-        'length_scale': 6*Math.exp(4.797290182),
-        'scale_mixture_rate': 2*Math.exp(-0.00002)
+        'length_scale': 1*Math.exp(1),
+        'scale_mixture_rate': 1*Math.exp(-0.00002)
     },
     LP_params: {
         EQ: {
             'amplitude': 1.0,
-            'length_scale': Math.exp(-0.5)
+            'length_scale': Math.exp(1)
         },
         ESS: {
-            'amplitude': 0.18,
-            'length_scale': 10,
-            'period': 10
+            'amplitude': 1,
+            'length_scale': 2,
+            'period': 4
         }
     },
+    ESS_params: {
+        'amplitude': 1,
+        'length_scale': 2,
+        'period': 4
+    },
     L_params: {
-        'amplitude': 0.0001,
+        'amplitude': 1,
         'bias_variance': 0.01,
-        'slope_variance': Math.exp(1.27037609),
+        'slope_variance': 0.01,
         'shift': 10*Math.exp(-0.000277507)
     },
     noise: 0.00034
@@ -58,12 +63,14 @@ socket.on('temp', async function(data) {
         let date_0 = Sensor_temp.X.date[0];
         let date_T = data.date + " " + data.time;
         Sensor_temp.X.feature.push( Math.floor((Math.abs(new Date(date_0) - new Date(date_T))/1000)/60));
-        await forecast();
+        forecast().then(()=>{
+            gauge2.setValueAnimated(data.temp, 1);
+        });
     }
     else{
         Sensor_temp.X.feature.push(0);
     }
-    gauge2.setValueAnimated(data.temp, 1);
+
 })
 
 async function forecast(){
@@ -73,5 +80,5 @@ async function forecast(){
     let X_predict = tf.linspace(0, Sensor_temp.X.feature[Sensor_temp.X.feature.length - 1] + 15, points).reshape([-1,1]);
     let obj = new GaussianProcessRegression(params);
     [y_mean, y_cov] = await obj.Condition(X_predict, X_train, y_train);
-    plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov);
+    await plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov);
 }

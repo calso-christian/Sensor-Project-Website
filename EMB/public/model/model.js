@@ -8,7 +8,7 @@ class model extends Kernels{
             let K = this.ExponentiatedQuadratic(X, Y, this.EQ_params)
                         .add(this.RationalQuadratic(X, Y, this.RQ_params))
                         .add(this.LocalPeriodic(X, Y, this.LP_params))
-                        .add(this.Linear(X, Y, this.L_params));
+                        .add(this.ExpSinSquared(X, Y, this.ESS_params))
             return K;
         });
     }

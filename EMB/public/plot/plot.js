@@ -1,7 +1,7 @@
-width = 1300;
+width = 1425;
 height = 630;
 
-function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='chart-temp'){
+async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='chart-temp'){
     X_predict = X_predict.squeeze().arraySync();
     y_std = tf.sqrt(obj.getDiag(y_cov, y_cov.shape[0]));
     let y_UpperCI = tf.squeeze(y_mean.add(tf.mul(y_std, 2))).arraySync();
@@ -12,12 +12,13 @@ function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='
         x: X_train.squeeze().arraySync(),
         y: y_train.squeeze().arraySync(),
         line: {color: "rgb(0,100,80)"}, 
-        mode: "lines", 
-        name: "Temperature",
+        mode: 'markers',
+        type: 'scatter',
+        name: "Reading",
         line: {
           color: 'rgb(219, 64, 82)',
-          width: 3
-        }
+        },
+        marker: { size: 12 }
       };
       
       let plot_predict = {
@@ -79,7 +80,7 @@ function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='
           },
           yaxis: {
             title: {
-              text: '°C',
+              text: '°Celsius',
               font: {
                 size: 18,
                 color: '#7f7f7f'

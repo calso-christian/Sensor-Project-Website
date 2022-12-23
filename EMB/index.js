@@ -114,12 +114,7 @@ function myLoop(delay) {
     let fakeTemp = Math.floor(Math.random()*50);
     io.sockets.emit('temp', {date: passDate, time: fakeTime, temp:fakeTemp});   
                    
-  }, 800*delay)
-}
-
-for (let i = 1; i < 50; i++){
-    myLoop(i);
-    i+=1;
+  }, 2000*delay)
 }
 
 
@@ -128,4 +123,8 @@ for (let i = 1; i < 50; i++){
 //log if there is a connection
 io.on('connection', (socket) => {
     console.log(`Someone connected " ${socket}`); //show a log as a new client connects.
+    for (let i = 1; i < 20; i++){
+        myLoop(i);
+    }
+    
 }) 

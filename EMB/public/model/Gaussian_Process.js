@@ -4,6 +4,7 @@ class GaussianProcessRegression extends Kernels{
         this.EQ_params = params.EQ_params,
         this.RQ_params = params.RQ_params,
         this.LP_params = params.LP_params;
+        this.ESS_params = params.ESS_params;
         this.L_params = params.L_params;
         this.noise = params.noise;
     }
