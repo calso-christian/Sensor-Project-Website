@@ -1,36 +1,30 @@
 let params = {
     EQ_params: {
-        'amplitude': Math.exp(1.080263054),
-        'length_scale': Math.exp(3.160075042)
+        'amplitude': 0.3710075772745033,
+        'length_scale': 81.24192660090051
     }, 
     RQ_params: {
-        'amplitude': Math.exp(-0.455801576),
-        'length_scale': 1*Math.exp(1),
-        'scale_mixture_rate': 1*Math.exp(-0.00002)
+        'amplitude': 0.7258569367724819,
+        'length_scale': 247.15194613725987,
+        'scale_mixture_rate': 0.033220246849394716
     },
     LP_params: {
         EQ: {
-            'amplitude': 1.0,
-            'length_scale': Math.exp(1)
+            'amplitude': 0.12953368120990774,
+            'length_scale': 1.4157372199331388
         },
         ESS: {
-            'amplitude': 1,
-            'length_scale': 2,
-            'period': 4
+            'amplitude': 1.0,
+            'length_scale': 18.954174013668947,
+            'period': 91.83853453999933
         }
     },
     ESS_params: {
-        'amplitude': 1,
-        'length_scale': 2,
-        'period': 4
+        'amplitude': 9.491499171850727,
+        'length_scale': 2.8379838188885054,
+        'period': 1420.632631693691
     },
-    L_params: {
-        'amplitude': 1,
-        'bias_variance': 0.01,
-        'slope_variance': 0.01,
-        'shift': 10*Math.exp(-0.000277507)
-    },
-    noise: 0.00034
+    noise: 0.023506654839978346
 }
 
 tf.setBackend('webgl');
@@ -69,7 +63,7 @@ async function forecast(data){
     let X_train = tf.tensor(data.X.feature).reshape([-1, 1]);
     let y_train = tf.tensor(data.y).reshape([-1, 1]);
     let X_predict = tf.linspace(0, data.X.feature[data.X.feature.length - 1] + 15, points).reshape([-1,1]);
-    let obj = new GaussianProcessRegression(params);
+    let obj = new GaussianProcessRegression(params, new model().Kernel);
     [y_mean, y_cov] = await obj.Condition(X_predict, X_train, y_train);
     await plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov);
 }
