@@ -142,7 +142,6 @@ function preProcess (data, sensor){
 io.on('connection', async (socket) => {
     console.log(`Someone connected " ${socket}`); //show a log as a new client connects.
     for (let i = 1; i < 20; i++){
-        await myLoop(i);
+       // await myLoop(i);
     }
-    
 }) 

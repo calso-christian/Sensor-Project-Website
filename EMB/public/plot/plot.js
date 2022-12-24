@@ -1,7 +1,7 @@
 width = 1425;
 height = 630;
 
-async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='chart-temp'){
+async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_){
     X_predict = X_predict.squeeze().arraySync();
     y_std = tf.sqrt(obj.getDiag(y_cov, y_cov.shape[0]));
     let y_UpperCI = tf.squeeze(y_mean.add(tf.mul(y_std, 2))).arraySync();
