@@ -1,7 +1,8 @@
 width = 1425;
 height = 630;
 
-async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_){
+async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, sensor){
+    id_='chart-' + sensor
     X_predict = X_predict.squeeze().arraySync();
     y_std = tf.sqrt(obj.getDiag(y_cov, y_cov.shape[0]));
     let y_UpperCI = tf.squeeze(y_mean.add(tf.mul(y_std, 2))).arraySync();
@@ -59,7 +60,7 @@ async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov,
         xaxis: { title: "Minute"},
         yaxis: { title: "Prediction"},  
         title: {
-            text:'Temperature Forecast',
+            text: sensor + ' Forecast',
             font: {
               size: 20
             },
@@ -80,7 +81,7 @@ async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov,
           },
           yaxis: {
             title: {
-              text: '°Celsius',
+              text: id_,
               font: {
                 size: 18,
                 color: '#7f7f7f'

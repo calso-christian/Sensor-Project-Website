@@ -1,18 +1,5 @@
 tf.setBackend('webgl');
 
-
-/*socket.on('temp', function(data) {
-    var x = data.time;
-    var y = data.temp;
-    
-    if(chartT.series[0].data.length > 40) {
-    chartT.series[0].addPoint([x, y], true, true, true);
-  } else {
-    chartT.series[0].addPoint([x, y], true, false, true);
-  }
-
-})*/
-
 socket.on('temp', async function(data) {
     if (data[0].X.date?.[1]){
         forecast(data[0], 'Temperature').then(()=>{
@@ -32,12 +19,10 @@ async function forecast(data, sensor){
 }
 
 
+//////////////////////////////////Sample Plot
 
-
-
-//Sample Plot
-let X = [], y = [];
 function SamplePlot(LINK, sensor){
+    let X = [], y = [];
     d3.csv(LINK).then(async function(data) {
         for (let val of Object.values(data)) {
             X.push([Number(val.Min)]);
