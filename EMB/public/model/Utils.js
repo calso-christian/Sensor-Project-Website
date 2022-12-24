@@ -4,7 +4,8 @@ class Utils{
     getDiag(X, len)
     {
         return tf.tidy(() => {
-            return tf.mul(X, tf.eye(len)).sum(0).expandDims(1);
+            X = tf.mul(X, tf.eye(len));
+            return X.sum(1).expandDims(1);
         });
     }
 

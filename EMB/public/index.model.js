@@ -1,5 +1,3 @@
-tf.setBackend('webgl');
-
 socket.on('temp', async function(data) {
     if (data[0].X.date?.[1]){
         forecast(data[0], 'Temperature').then(()=>{
@@ -21,9 +19,9 @@ async function forecast(data, sensor){
 
 //////////////////////////////////Sample Plot
 
-function SamplePlot(LINK, sensor){
+async function SamplePlot(LINK, sensor){
     let X = [], y = [];
-    d3.csv(LINK).then(async function(data) {
+    await d3.csv(LINK).then(async function(data) {
         for (let val of Object.values(data)) {
             X.push([Number(val.Min)]);
             y.push(parseFloat(val[sensor]));
@@ -35,13 +33,24 @@ function SamplePlot(LINK, sensor){
     
         let X_train = tf.slice(X, 0, Database_split).reshape([-1,1]);
         let y_train = tf.slice(y, 0, Database_split).reshape([-1,1]);
-        let points = 3000;
+        let points = 1000;
         let X_predict = tf.linspace(0, 10440, points).reshape([-1,1]);
         let obj = new GaussianProcessRegression(params[sensor], new model().Kernel);
         let [y_mean, y_cov] = await obj.Condition(X_predict, X_train, y_train);
-        plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, sensor);
+        await plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, sensor);
     });
 };
 
-SamplePlot("https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Sensor%20Readings.csv", 'Temperature');
-SamplePlot("https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Sensor%20Readings.csv", 'Humidity');
+(async() => {
+    await tf.ready 
+    tf.setBackend('webgl');
+    main();
+  })();
+
+async function main(){
+    LINK = "https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Sensor%20Readings.csv";
+    await SamplePlot(LINK, 'Temperature');
+    await SamplePlot(LINK, 'Humidity');
+    tf.disposeVariables();
+}
+
