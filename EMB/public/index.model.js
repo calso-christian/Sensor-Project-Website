@@ -43,7 +43,5 @@ function SamplePlot(LINK, sensor){
     });
 };
 
-
-
-
+SamplePlot("https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Sensor%20Readings.csv", 'Temperature');
 SamplePlot("https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Sensor%20Readings.csv", 'Humidity');
