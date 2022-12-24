@@ -39,10 +39,11 @@ function SamplePlot(LINK, sensor){
         let X_predict = tf.linspace(0, 10440, points).reshape([-1,1]);
         let obj = new GaussianProcessRegression(params[sensor], new model().Kernel);
         let [y_mean, y_cov] = await obj.Condition(X_predict, X_train, y_train);
-        plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id='chart-' + sensor);
+        plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, sensor);
     });
 };
 
 
-SamplePlot("https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Sensor%20Readings.csv", 'Temperature');
+
+
 SamplePlot("https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Sensor%20Readings.csv", 'Humidity');
