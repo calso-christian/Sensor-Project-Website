@@ -18,6 +18,7 @@ async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov,
         type: 'scatter',
         name: "Reading",
         line: {
+          shape: 'spline',
           size: 3,  
         },
         marker: { 
@@ -31,6 +32,7 @@ async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov,
         mode: "lines", 
         name: "Forecast",
         line: {
+          shape: 'spline',
           color: 'rgb(55, 128, 191)',
           width: 3
         }
