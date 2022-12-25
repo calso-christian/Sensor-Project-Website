@@ -50,7 +50,7 @@ class Utils{
         let [Xr, Xc] = X.shape;
         let M = math.zeros(Xr, Xc)._data;
         X = await X.array();
-        M = math.inv(X);
+        M = await math.inv(X);
         M = tf.squeeze(tf.tensor(M));
         return M;
     }

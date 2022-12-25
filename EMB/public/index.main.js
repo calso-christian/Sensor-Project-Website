@@ -53,3 +53,4 @@ async function main(){
     tf.disposeVariables();
 }
 
+console.log(1);
