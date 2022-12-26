@@ -98,33 +98,32 @@ parser.on('data', (temp) => {
 */
 
 
-const fs = require('fs');
-var data;
-fs.readFile('./data.json', 'utf-8', (err, jsonString) => {
-    console.log(1)
-    /*if(err) {
-        console.error(err);
-    }
-    else {
-        try{
-            data = JSON.parse(jsonString)
-            data.Temperature.y.push(4);
-            console.log(data.Temperature.y);
+const fs = require('fs').promises;
+let data;
 
-            fs.writeFile('./data.json', JSON.stringify(data,null,2), err => {
-                if(err){
-                    console.log(err);
-                }
-            });
-            
-        } catch(err) {
-            console.log('Error Parsing JSON', err)
+async function Data_reader(){
+    data = JSON.parse(await fs.readFile('./data.json', 'utf-8'));
+}
+
+async function Data_writer(){
+    data.Temperature.y.push(69696969);
+    await fs.writeFile('./data.json', JSON.stringify(data,null,2), err => {
+        if(err){
+            console.log(err);
         }
-        
-    }*/  
-})
-console.log(2);
+    });
+}
 
+//log if there is a connection
+io.on('connection', async (socket) => {
+    console.log(`Someone connected " ${socket}`); //show a log as a new client connects.
+    await Data_reader();
+    await Data_writer();
+    console.log(data.Temperature.y);
+    for (let i = 1; i < 20; i++){
+       // await myLoop(i);
+    }
+}) 
 
 
 //ACCUMULATION HERE
@@ -168,10 +167,3 @@ function preProcess (data, sensor){
 }
 */
 
-//log if there is a connection
-io.on('connection', async (socket) => {
-    console.log(`Someone connected " ${socket}`); //show a log as a new client connects.
-    for (let i = 1; i < 20; i++){
-       // await myLoop(i);
-    }
-}) 
