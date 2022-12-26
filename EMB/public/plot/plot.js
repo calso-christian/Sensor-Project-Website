@@ -59,7 +59,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         title: {
             text: sensor + ' Forecast',
             font: {
-              size: 20
+              size: 32
             },
             xref: 'paper',
             x: 0.05,
@@ -71,8 +71,8 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
             title: {
               text: 'Minute',
               font: {
-                size: 18,
-                color: '#7f7f7f'
+                size: 22,
+                color: '#000000'
               }
             },
           },
@@ -80,8 +80,8 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
             title: {
               text: sensor,
               font: {
-                size: 18,
-                color: '#7f7f7f'
+                size: 22,
+                color: '#000000'
               }
             }
           }

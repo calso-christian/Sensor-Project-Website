@@ -12,15 +12,12 @@ if( 'function' === typeof importScripts) {
 };
 
 this.onmessage = function(e) {
-
-    
     (async() => {
         await tf.ready 
         tf.setBackend('webgl');
         main(e.data);
       })();
 };
-
 
 async function main(sensor){
     LINK = "https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Sensor%20Readings.csv";
@@ -47,9 +44,6 @@ async function forecast(data, sensor){
     [y_mean, y_cov] = await obj.Condition(X_predict, X_train, y_train);
     await plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id='chart-' + sensor);
 }
-
-
-//////////////////////////////////Sample Plot
 
 async function SampleForecast(LINK, sensor){
     let X = [], y = [], obj, X_predict, y_mean, y_cov, y_std;

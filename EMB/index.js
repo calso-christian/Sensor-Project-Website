@@ -1,15 +1,23 @@
-//use environmental files
 require('dotenv').config()
 
-//import files
 const express = require('express');
 const mongoose = require('mongoose');
 const schema = require('./schema');
 
+const fs = require('fs').promises;
 const Data = require('./Data');
-
-//express initialization
 const app = express();
+
+//listen to port (localhost:4000)
+var server = app.listen(process.env.PORT, "0.0.0.0", () => { //Start the server, listening on port 4000.
+    console.log("Listening to requests on port ", process.env.PORT);
+})
+
+//Bind socket.io to our express server.
+var io = require('socket.io')(server); 
+
+//Send index.html page on GET /
+app.use(express.static('public')); 
 
 
 /*
@@ -31,19 +39,6 @@ async function connect() {
 //call function to connect to database
 connect();
 */
-
-//listen to port (localhost:4000)
-var server = app.listen(process.env.PORT, "0.0.0.0", () => { //Start the server, listening on port 4000.
-    console.log("Listening to requests on port ", process.env.PORT);
-})
-
-//Bind socket.io to our express server.
-var io = require('socket.io')(server); 
-
-
-//Send index.html page on GET /
-app.use(express.static('public')); 
-
 
 
 /*
@@ -71,16 +66,18 @@ parser.on('data', (temp) => {
         let hours = today.getHours(); 
         let minute = today.getMinutes(); 
         let seconds = today.getSeconds();
-        let passDate = day+"-"+month+"-"+year;
+        let passDate = year + "/" + month + "/" + day;
         let passTime = hours+":"+minute+":"+seconds;
         let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
 
-    io.sockets.emit('temp', {date: passDate, time: passTime, temp:passTemp}); 
-    io.sockets.emit('hum', {date: passDate, time: passTime, temp:passHum});
+    preProcess({date: passDate, time: passTime, temp: passTemp}, 'Temperature');
+    io.sockets.emit('temp', [Data['Temperature'], passTemp]); 
+
+    //io.sockets.emit('hum', {date: passDate, time: passTime, temp:passHum});
     
 
     var min = today.getMinutes();
-
+    
     if(min === 0 || min === 15 || min === 30 || min === 45) {
         const dataSave = new schema({
             Temperature: passTemp,
@@ -96,11 +93,36 @@ parser.on('data', (temp) => {
 */
 
 
+let Data;
+
+async function Data_reader(){
+    Data = JSON.parse(await fs.readFile('./Data.json', 'utf-8'));
+}
+
+async function Data_writer(){
+    Data.Temperature.y.push(69696969);
+    await fs.writeFile('./Data.json', JSON.stringify(Data,null,2), err => {
+        if(err){
+            console.log(err);
+        }
+    });
+}
+
+io.on('connection', async (socket) => {
+    console.log(`Someone connected " ${socket}`);
+    await Data_reader();
+    await Data_writer();
+    console.log(Data.Temperature.y);
+    for (let i = 1; i < 20; i++){
+       // await myLoop(i);
+    }
+}) 
+
 
 //ACCUMULATION HERE
 
 
-          
+  /*        
 async function myLoop(delay) {         
   setTimeout(() => {   
     const today = new Date();
@@ -136,12 +158,5 @@ function preProcess (data, sensor){
         Data[sensor].X.feature.push(0);
     }
 }
+*/
 
-
-//log if there is a connection
-io.on('connection', async (socket) => {
-    console.log(`Someone connected " ${socket}`); //show a log as a new client connects.
-    for (let i = 1; i < 20; i++){
-       // await myLoop(i);
-    }
-}) 
