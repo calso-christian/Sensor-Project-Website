@@ -1,0 +1,102 @@
+@font-face {
+    font-family: Secular; 
+    src: url(fonts/SecularOne-Regular.ttf);
+  }
+
+body{
+    font-family: 'Secular';
+    padding-bottom: 50px;
+  }
+
+.img1 img{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 10px solid #9282F4;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-top: 33px;
+}
+
+h1, h2, h5{
+    color: #4B36C8;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 96px;
+    margin-top: 50px;
+    font-size: 50px;
+}
+
+h5{
+    font-size: 18px;
+}
+
+.card{
+    background: #C8C0F9;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease 0s;
+}
+
+.card:hover{
+    transform: translateY(-10px);
+}
+
+.main-text{
+    text-align: center;
+    padding: 30px 0;
+}
+
+.socials{
+    list-style-type: none;
+    text-align: center;
+    padding: 0;
+}
+
+.socials li{
+    display: inline-block;
+}
+
+.socialslogo{
+    position: relative;
+    width: 35px;
+    margin: 39px 13px;
+    transition: all 0.3s ease 0s;
+}
+
+.socialslogo:hover{
+    cursor: pointer;
+    transform: translateY(-10px);
+}
+
+.navbar-nav a{
+    font-size: 30px;
+    color: #4B36C8;
+    transition: all 0.3s ease 0s;
+}
+
+.navbar-nav a:hover{
+    transform: translateY(-3px);
+    color: #9282F4;
+}
+
+
+.custom-toggler .navbar-toggler-icon {
+        background-image: url(
+"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(75, 54, 200, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+
+.custom-toggler.navbar-toggler {
+        outline: none!important;
+        border: none!important;
+    }
+
+.current{
+    text-decoration-line: underline;  
+    text-decoration-thickness: 5px;
+}
