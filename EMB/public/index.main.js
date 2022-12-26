@@ -6,11 +6,14 @@ socket.on('temp', async function(data) {
     }
 })
 
+let done = 0;
+
 const worker = new Worker('index.worker.js');
 worker.postMessage('Temperature');
 worker.postMessage('Humidity');
 worker.addEventListener("message", (event) => {
 	let data = event.data;
     plot_Predictions(data.X_predict, data.X, data.y, data.y_UpperCI, data.y_LowerCI, data.y_mean, data.sensor);
+    
 });
 
