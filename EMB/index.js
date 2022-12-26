@@ -71,16 +71,18 @@ parser.on('data', (temp) => {
         let hours = today.getHours(); 
         let minute = today.getMinutes(); 
         let seconds = today.getSeconds();
-        let passDate = day+"-"+month+"-"+year;
+        let passDate = year + "/" + month + "/" + day;
         let passTime = hours+":"+minute+":"+seconds;
         let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
 
-    io.sockets.emit('temp', {date: passDate, time: passTime, temp:passTemp}); 
-    io.sockets.emit('hum', {date: passDate, time: passTime, temp:passHum});
+    preProcess({date: passDate, time: passTime, temp: passTemp}, 'Temperature');
+    io.sockets.emit('temp', [Data['Temperature'], passTemp]); 
+
+    //io.sockets.emit('hum', {date: passDate, time: passTime, temp:passHum});
     
 
     var min = today.getMinutes();
-
+    
     if(min === 0 || min === 15 || min === 30 || min === 45) {
         const dataSave = new schema({
             Temperature: passTemp,
@@ -96,11 +98,39 @@ parser.on('data', (temp) => {
 */
 
 
+const fs = require('fs');
+var data;
+fs.readFile('./data.json', 'utf-8', (err, jsonString) => {
+    console.log(1)
+    /*if(err) {
+        console.error(err);
+    }
+    else {
+        try{
+            data = JSON.parse(jsonString)
+            data.Temperature.y.push(4);
+            console.log(data.Temperature.y);
+
+            fs.writeFile('./data.json', JSON.stringify(data,null,2), err => {
+                if(err){
+                    console.log(err);
+                }
+            });
+            
+        } catch(err) {
+            console.log('Error Parsing JSON', err)
+        }
+        
+    }*/  
+})
+console.log(2);
+
+
 
 //ACCUMULATION HERE
 
 
-          
+  /*        
 async function myLoop(delay) {         
   setTimeout(() => {   
     const today = new Date();
@@ -136,7 +166,7 @@ function preProcess (data, sensor){
         Data[sensor].X.feature.push(0);
     }
 }
-
+*/
 
 //log if there is a connection
 io.on('connection', async (socket) => {
