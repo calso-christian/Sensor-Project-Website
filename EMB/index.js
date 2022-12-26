@@ -41,7 +41,7 @@ connect();
 */
 
 
-/*
+
 //connect serial communication to arduino
 const { SerialPort } = require('serialport'); 
 const { ReadlineParser } = require('@serialport/parser-readline');
@@ -54,54 +54,17 @@ const parser = port.pipe(new ReadlineParser({
 }))
 
 //read data and callback function
-parser.on('data', (temp) => {
-    var obj = JSON.parse(temp);
-    var passTemp = obj["Temperature"];
-    var passHum = obj["Humidity"];
-    console.log(obj);
-    const today = new Date();
-        let month = today.getMonth()+1; 
-        let day = today.getDate(); 
-        let year = today.getFullYear();
-        let hours = today.getHours(); 
-        let minute = today.getMinutes(); 
-        let seconds = today.getSeconds();
-        let passDate = year + "/" + month + "/" + day;
-        let passTime = hours+":"+minute+":"+seconds;
-        let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
-
-    preProcess({date: passDate, time: passTime, temp: passTemp}, 'Temperature');
-    io.sockets.emit('temp', [Data['Temperature'], passTemp]); 
-
-    //io.sockets.emit('hum', {date: passDate, time: passTime, temp:passHum});
-    
-
-    var min = today.getMinutes();
-    
-    if(min === 0 || min === 15 || min === 30 || min === 45) {
-        const dataSave = new schema({
-            Temperature: passTemp,
-            Humidity: passHum,
-            saveDate: dt,
-        });
-        dataSave.save()
-            .then((result) => console.log(result))
-            .catch((err) => console.log(err));
-    }
-    
-});
-*/
 
 
-let Data;
+
+let jsonData;
 
 async function Data_reader(){
-    Data = JSON.parse(await fs.readFile('./Data.json', 'utf-8'));
+    jsonData = JSON.parse(await fs.readFile('./Data.json', 'utf-8'));
 }
 
-async function Data_writer(){
-    Data.Temperature.y.push(69696969);
-    await fs.writeFile('./Data.json', JSON.stringify(Data,null,2), err => {
+async function Data_writer(obj){
+    await fs.writeFile('./Data.json', JSON.stringify(obj,null,2), err => {
         if(err){
             console.log(err);
         }
@@ -109,13 +72,69 @@ async function Data_writer(){
 }
 
 io.on('connection', async (socket) => {
+
     console.log(`Someone connected " ${socket}`);
     await Data_reader();
-    await Data_writer();
-    console.log(Data.Temperature.y);
-    for (let i = 1; i < 20; i++){
-       // await myLoop(i);
-    }
+    
+    
+    
+
+    parser.on('data', (temp) => {
+        var obj = JSON.parse(temp);
+        var passTemp = obj["Temperature"];
+        var passHum = obj["Humidity"];
+
+        console.log(obj);
+        
+        const today = new Date();
+            let month = today.getMonth()+1; 
+            let day = today.getDate(); 
+            let year = today.getFullYear();
+            let hours = today.getHours(); 
+            let minute = today.getMinutes(); 
+            let seconds = today.getSeconds();
+            let passDate = year + "/" + month + "/" + day;
+            let passTime = hours+":"+minute+":"+seconds;
+            let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
+    
+    
+        //io.sockets.emit('temp', [Data['Temperature'], passTemp]); 
+    
+        //io.sockets.emit('hum', {date: passDate, time: passTime, temp:passHum});
+        
+    
+        var min = today.getMinutes();
+        
+        if(min === 0 || min === 15 || min === 30 || min === 45) {
+            /*const dataSave = new schema({
+                Temperature: passTemp,
+                Humidity: passHum,
+                saveDate: dt,
+            });
+            dataSave.save()
+                .then((result) => console.log(result))
+                .catch((err) => console.log(err));*/
+    
+            jsonData.Temperature.X.date.push(dt);
+            jsonData.Temperature.y.push(passTemp);
+
+            if(jsonData.Temperature.X.date?.[1]){
+                let date_0 =  jsonData.Temperature.X.date[0];
+                let date_T = dt;
+                jsonData.Temperature.X.feature.push(Math.floor((Math.abs(new Date(date_0) - new Date(date_T))/1000)/60));
+            }
+            else {
+                jsonData.Temperature.X.feature.push(0);
+            }
+
+            console.log(jsonData);
+            Data_writer(jsonData);
+    
+        }
+        
+    });
+
+
 }) 
 
 
