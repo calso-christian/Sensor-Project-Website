@@ -1,15 +1,23 @@
-//use environmental files
 require('dotenv').config()
 
-//import files
 const express = require('express');
 const mongoose = require('mongoose');
 const schema = require('./schema');
 
+const fs = require('fs').promises;
 const Data = require('./Data');
-
-//express initialization
 const app = express();
+
+//listen to port (localhost:4000)
+var server = app.listen(process.env.PORT, "0.0.0.0", () => { //Start the server, listening on port 4000.
+    console.log("Listening to requests on port ", process.env.PORT);
+})
+
+//Bind socket.io to our express server.
+var io = require('socket.io')(server); 
+
+//Send index.html page on GET /
+app.use(express.static('public')); 
 
 
 /*
@@ -31,19 +39,6 @@ async function connect() {
 //call function to connect to database
 connect();
 */
-
-//listen to port (localhost:4000)
-var server = app.listen(process.env.PORT, "0.0.0.0", () => { //Start the server, listening on port 4000.
-    console.log("Listening to requests on port ", process.env.PORT);
-})
-
-//Bind socket.io to our express server.
-var io = require('socket.io')(server); 
-
-
-//Send index.html page on GET /
-app.use(express.static('public')); 
-
 
 
 /*
@@ -98,28 +93,26 @@ parser.on('data', (temp) => {
 */
 
 
-const fs = require('fs').promises;
-let data;
+let Data;
 
 async function Data_reader(){
-    data = JSON.parse(await fs.readFile('./data.json', 'utf-8'));
+    Data = JSON.parse(await fs.readFile('./Data.json', 'utf-8'));
 }
 
 async function Data_writer(){
-    data.Temperature.y.push(69696969);
-    await fs.writeFile('./data.json', JSON.stringify(data,null,2), err => {
+    Data.Temperature.y.push(69696969);
+    await fs.writeFile('./Data.json', JSON.stringify(Data,null,2), err => {
         if(err){
             console.log(err);
         }
     });
 }
 
-//log if there is a connection
 io.on('connection', async (socket) => {
-    console.log(`Someone connected " ${socket}`); //show a log as a new client connects.
+    console.log(`Someone connected " ${socket}`);
     await Data_reader();
     await Data_writer();
-    console.log(data.Temperature.y);
+    console.log(Data.Temperature.y);
     for (let i = 1; i < 20; i++){
        // await myLoop(i);
     }
