@@ -11,6 +11,7 @@ body{
   margin: 0 auto;
 }
 
+/*------------Navbar-------------*/
 .navbar-nav a{
   font-size: 30px;
   color: #4B36C8;
@@ -27,6 +28,7 @@ body{
   text-decoration-thickness: 5px;
 }
 
+/*------------Greetings Card-------------*/
 .greetings{
   position: relative;
   background: #8371F3;
@@ -55,6 +57,12 @@ body{
   margin-bottom: 0px;
 }
 
+.greetings:hover, .gcont:hover{
+  transform: translateY(-10px);
+}
+
+
+/*------------Date-------------*/
 .date-card{
   padding-top: 50px;
   color: #8371F3;
@@ -81,11 +89,7 @@ body{
   width: 150px;
 }
 
-.gauges{
-  position: relative;
-  padding-top: 12px;
-  display: inline-flex;
-}
+/*------------Gauges-------------*/
 
 .humidity, .temperature, .water{
   font-size: 25px;
@@ -95,36 +99,42 @@ body{
   background: #C8C0F9;
   box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  margin-top: 53px;
-  margin-right: 43px;
   padding-left: 26px;
   padding-left: 26px;
-  padding-top: 25px;
+  padding-top: 30px;
 }
 
+.humidity, .temperature{
+  margin-right: 15px;
+}
+
+.gaugerow{
+  margin-top: 50px;
+  margin-left: 2px;
+}
 .gauges h3{
   font-weight: normal;
   margin-bottom: 0;
 }
 
 .hcont, .tcont, .wcont{
-  display: inline-grid;
+  display: inline-flex;
 }
 
 #hlogo{
-  position: absolute;
+  position: relative;
   margin-left: 30px;
   margin-top: 15px;
 }
 
 #tlogo{
-  position: absolute;
+  position: relative;
   margin-top: 15px;
   margin-left: 40px;
 }
 
 #wlogo{
-  position: absolute;
+  position: relative;
   margin-left: 20px;
   margin-bottom: 50px;
 }
@@ -169,18 +179,27 @@ body{
   font-weight: bold;
   font-size: 30px
 }
-
-.hcont img, .tcont img, .wcont img{
-  place-self: center;
+.gcont{
+  transition: all 0.3s ease 0s;
 }
+
+
+/*.hcont img, .tcont img, .wcont img{
+  place-self: center;
+}*/
 
 .graph{
   margin-top: 53px;
-  width: 1425px;
+  max-width: 1320px;
   height: 630px;
   box-sizing: border-box;
   box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
   position: relative;
+  margin-left: 20px;
+}
+
+#chart-temperature{
+  width: 100%;
 }
 
 #chart-water{
@@ -188,12 +207,6 @@ body{
   place-self: center;
 }
 
-.gcont{
-  transition: all 0.3s ease 0s;
-}
-.greetings:hover, .gcont:hover{
-  transform: translateY(-10px);
-}
 
 /* Responsiveness */
 @media only screen and (max-width: 600px) {
@@ -212,6 +225,20 @@ body{
     padding-top: 5px;
     line-height: 25px;
     font-size: 18px;
+  }
+
+  /*WIP ang finnicky ng logos at different sizes*/
+  #hlogo, #tlogo, #wlogo{
+    width: 100px;
+    height: 100px;
+    margin-left: 0px;
+    margin-top: 30px;
+  }
+}
+
+  @media only screen and (max-width: 1600px){
+  .gcont{
+    margin-bottom: 35px;
   }
 }
 

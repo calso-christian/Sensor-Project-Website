@@ -1,4 +1,4 @@
-width = 1425;
+width = 1250;
 height = 630;
 
 async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor){
@@ -54,6 +54,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
       
       let data = [plot_train, plot_predict, UpperCI, LowerCI];
       let layout = {
+        responsive: true,
         xaxis: { title: "Minute"},
         yaxis: { title: "Prediction"},  
         title: {
@@ -85,6 +86,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
               }
             }
           }
+
       };
       Plotly.newPlot('chart-' + sensor, data, layout);
 }
