@@ -11,7 +11,6 @@ body{
   margin: 0 auto;
 }
 
-
 .navbar-nav a{
   font-size: 30px;
   color: #4B36C8;
@@ -33,13 +32,12 @@ body{
   background: #8371F3;
   box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  width: 824px;
-  height: 200px;
   padding-left: 26px;
   padding-top: 18px;
   margin-top: 51px;
   transition: all 0.3s ease 0s;
   animation: pop 0.3s linear 1;
+  padding-bottom: 18px;
 }
 .greetings h1{
   font-weight: 400;
@@ -56,6 +54,29 @@ body{
   line-height: 36px;
   margin-bottom: 0px;
 }
+
+.date-card{
+  padding-top: 50px;
+  color: #8371F3;
+  font-size: 25px;
+}
+
+.date-card h1{
+  color: #4B36C8;
+  font-size: 50px;
+  line-height: 50px;
+}
+
+.girl{
+  position: relative;
+  top: -150px;
+  left: 100px
+}
+
+.firstrow{
+  height: 280px;
+}
+
 
 .gauges{
   position: relative;
@@ -75,6 +96,7 @@ body{
   margin-right: 43px;
   padding-left: 26px;
   padding-left: 26px;
+  padding-top: 25px;
 }
 
 .gauges h3{
@@ -169,3 +191,31 @@ body{
 .greetings:hover, .gcont:hover{
   transform: translateY(-10px);
 }
+
+/* Responsiveness */
+@media only screen and (max-width: 600px) {
+  .greetings{
+    text-align: center;
+    padding-right: 25px;
+  }
+
+  .greetings h1{
+    padding-top: 14px;
+    font-size: 35px;
+    line-height: 40px;
+  }
+
+  .greetings p{
+    padding-top: 5px;
+    line-height: 25px;
+    font-size: 18px;
+  }
+}
+
+/* Responsiveness 
+
+@media screen and (min-width:750px){
+  .gauges{
+    display: inline-flex;
+  }
+} */
