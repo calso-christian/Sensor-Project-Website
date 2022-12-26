@@ -1,26 +1,23 @@
 width = 1425;
 height = 630;
 
-async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id_='chart-temp'){
-    X_predict = X_predict.squeeze().arraySync();
-    y_std = tf.sqrt(obj.getDiag(y_cov, y_cov.shape[0]));
-    let y_UpperCI = tf.squeeze(y_mean.add(tf.mul(y_std, 2))).arraySync();
-    let y_LowerCI = tf.squeeze(y_mean.sub(tf.mul(y_std, 2))).arraySync();
-    y_mean = y_mean.squeeze().arraySync();
-    
+async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor){
+
     let plot_train = {
-        x: X_train.squeeze().arraySync(),
-        y: y_train.squeeze().arraySync(),
+        x: X,
+        y: y,
         line: {color: "rgb(0,100,80)"}, 
-        mode: 'markers',
+        mode: 'lines+markers',
         type: 'scatter',
         name: "Reading",
         line: {
-          color: 'rgb(219, 64, 82)',
+          shape: 'spline',
+          size: 3,  
         },
-        marker: { size: 12 }
-      };
-      
+        marker: { 
+          size: 8,
+          color: 'rgb(219, 64, 82)'
+        }};
       let plot_predict = {
         x: X_predict,
         y: y_mean,
@@ -28,6 +25,7 @@ async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov,
         mode: "lines", 
         name: "Forecast",
         line: {
+          shape: 'spline',
           color: 'rgb(55, 128, 191)',
           width: 3
         }
@@ -59,7 +57,7 @@ async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov,
         xaxis: { title: "Minute"},
         yaxis: { title: "Prediction"},  
         title: {
-            text:'Temperature Forecast',
+            text: sensor + ' Forecast',
             font: {
               size: 20
             },
@@ -80,7 +78,7 @@ async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov,
           },
           yaxis: {
             title: {
-              text: '°Celsius',
+              text: sensor,
               font: {
                 size: 18,
                 color: '#7f7f7f'
@@ -88,6 +86,6 @@ async function plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov,
             }
           }
       };
-      Plotly.newPlot(id_, data, layout);
+      Plotly.newPlot('chart-' + sensor, data, layout);
 }
 

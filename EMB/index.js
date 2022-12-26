@@ -4,8 +4,9 @@ require('dotenv').config()
 //import files
 const express = require('express');
 const mongoose = require('mongoose');
-const schema = require('./schema')
+const schema = require('./schema');
 
+const Data = require('./Data');
 
 //express initialization
 const app = express();
@@ -95,8 +96,12 @@ parser.on('data', (temp) => {
 */
 
 
+
+//ACCUMULATION HERE
+
+
           
-function myLoop(delay) {         
+async function myLoop(delay) {         
   setTimeout(() => {   
     const today = new Date();
         let month = today.getMonth() + 1; 
@@ -110,21 +115,33 @@ function myLoop(delay) {
         let dt = year + "/" + month + "/" + day + " " + hours + ":" + minute;
 
     let fakeTime = hours + ":" + String( 1 + delay ) + ":" + seconds;   
-    
     let fakeTemp = Math.floor(Math.random()*50);
-    io.sockets.emit('temp', {date: passDate, time: fakeTime, temp:fakeTemp});   
+
+    preProcess({date: passDate, time: fakeTime, temp: fakeTemp}, 'Temperature');
+    io.sockets.emit('temp', [Data['Temperature'], fakeTemp]);   
                    
   }, 2000*delay)
 }
 
+function preProcess (data, sensor){
+    Data[sensor].X.date.push(data.date + " " + data.time);
+    Data[sensor].y.push(data.temp);
 
+    if (Data[sensor].X.date?.[1]){
+        let date_0 =  Data[sensor].X.date[0];
+        let date_T = data.date + " " + data.time;
+        Data[sensor].X.feature.push( Math.floor((Math.abs(new Date(date_0) - new Date(date_T))/1000)/60));
+    }
+    else{
+        Data[sensor].X.feature.push(0);
+    }
+}
 
 
 //log if there is a connection
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
     console.log(`Someone connected " ${socket}`); //show a log as a new client connects.
     for (let i = 1; i < 20; i++){
-        myLoop(i);
+       // await myLoop(i);
     }
-    
 }) 

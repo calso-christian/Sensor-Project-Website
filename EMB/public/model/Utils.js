@@ -4,7 +4,8 @@ class Utils{
     getDiag(X, len)
     {
         return tf.tidy(() => {
-            return tf.mul(X, tf.eye(len)).sum(0).expandDims(1);
+            X = tf.mul(X, tf.eye(len));
+            return X.sum(1).expandDims(1);
         });
     }
 
@@ -49,7 +50,7 @@ class Utils{
         let [Xr, Xc] = X.shape;
         let M = math.zeros(Xr, Xc)._data;
         X = await X.array();
-        M = math.inv(X);
+        M = await math.inv(X);
         M = tf.squeeze(tf.tensor(M));
         return M;
     }
