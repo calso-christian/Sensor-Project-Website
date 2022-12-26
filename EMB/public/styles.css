@@ -74,9 +74,12 @@ body{
 }
 
 .firstrow{
-  height: 280px;
+  height: 250px;
 }
 
+.time{
+  width: 150px;
+}
 
 .gauges{
   position: relative;
