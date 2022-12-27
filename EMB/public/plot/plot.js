@@ -77,8 +77,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
                 color: '#000000'
               }
             }
-          }
-
+          },
   };
 
   await Plotly.newPlot('chart-'+ sensor, data, layout, config);
