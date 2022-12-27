@@ -94,7 +94,7 @@ body{
 .humidity, .temperature, .water{
   font-size: 25px;
   width: 400px;
-  height: 269px;
+  height: 249px;
   color: #fff;
   background: #C8C0F9;
   box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
