@@ -46,7 +46,7 @@ async function SampleForecast(LINK, sensor){
         }
         let i = X.length - 2;
         let start = X[i][0];
-        let points = 1000;
+        let points = 400;
 
         X = await tf.slice(X, 0, i).reshape([-1,1]);
         y = await tf.slice(y, 0, i).reshape([-1,1]);

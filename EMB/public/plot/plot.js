@@ -22,7 +22,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
       let plot_predict = {
         x: X_predict,
         y: y_mean,
-        line: {color: "rgb(0,100,80)"}, 
+        line: {color: "rgb(102,0,204)"}, 
         mode: 'lines+markers',
         type: 'scatter',
         name: "Forecast",
@@ -94,11 +94,12 @@ function feature_to_date(feature, date_0){
   let date = [];
   for (const item of feature){
     let date_T =  new Date(date_0);
+    date_T.setMinutes(date_T.getMinutes() + Number(item));
+
     let min = String(date_T.getMinutes());
-    if (date_T.getMinutes() < 10){
+    if (min < 10){
       min = "0" + min;  
     }
-    date_T.setMinutes(date_T.getMinutes() + Number(item));
     date.push(String(date_T.getFullYear() + "-" + String(date_T.getMonth() + 1) +  "-"
                      + date_T.getDate() + " " + date_T.getHours() + ":" + min));
   }
