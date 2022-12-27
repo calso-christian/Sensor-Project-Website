@@ -21,7 +21,7 @@ app.use(express.static('public'));
 
 
 
-
+/*
 //connect serial communication to arduino
 const { SerialPort } = require('serialport'); 
 const { ReadlineParser } = require('@serialport/parser-readline');
@@ -32,7 +32,7 @@ const port = new SerialPort({
 const parser = port.pipe(new ReadlineParser({
     delimiter: '\n'
 }))
-
+*/
 //read data and callback function
 
 
@@ -57,6 +57,7 @@ io.on('connection', async (socket) => {
     await Data_reader();
     io.sockets.emit('Temperature', jsonData.Temperature);   
     
+    /*
     parser.on('data', (temp) => {
         let obj = JSON.parse(temp);
         let passTemp = obj["Temperature"];
@@ -110,7 +111,7 @@ io.on('connection', async (socket) => {
     
         }
         
-    });
+    });*/
 
 
 })
