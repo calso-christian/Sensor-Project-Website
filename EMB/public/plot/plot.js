@@ -1,9 +1,9 @@
 width = 1250;
 height = 630;
 
-async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022/12/26 21:6"){
-  feature_to_date(X, date_0);
-
+async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022-12-26 21:6"){
+  X = feature_to_date(X, date_0);
+  X_predict = feature_to_date(X_predict, X[0]);
     let plot_train = {
         x: X,
         y: y,
@@ -16,20 +16,20 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
           size: 3,  
         },
         marker: { 
-          size: 8,
+          size: 5,
           color: 'rgb(219, 64, 82)'
         }};
       let plot_predict = {
         x: X_predict,
         y: y_mean,
-        line: {color: "rgb(0,100,80)"}, 
-        mode: "lines", 
+        line: {color: "rgb(102,0,204)"}, 
+        mode: 'lines+markers',
+        type: 'scatter',
         name: "Forecast",
         line: {
           shape: 'spline',
-          color: 'rgb(55, 128, 191)',
-          width: 3
-        }
+          size: 3,  
+        },
       };
       
       let UpperCI = {
@@ -39,7 +39,6 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         fillcolor: "rgba(0,100,80,0.2)", 
         line: {color: "transparent"}, 
         name: "Uncertainty", 
-        type: "scatter"
       };
       
       let LowerCI = {
@@ -50,13 +49,14 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         line: {color: "transparent"}, 
         name: "Uncertainty", 
         showlegend: false, 
-        type: "scatter"
       };
       
       let data = [plot_train, plot_predict, UpperCI, LowerCI];
       let config = {responsive: true}
       let layout = {
-        xaxis: { title: "Minute"},
+        xaxis: { 
+          title: "Minute",
+          type: 'date'},
         yaxis: { title: "Prediction"},  
         title: {
             text: sensor + ' Forecast',
@@ -92,13 +92,17 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
 
 function feature_to_date(feature, date_0){
   let date = [];
-  date_0 = new Date(date_0);
-  feature.forEach( function(item){
-    date_0.setMinutes(date_0.getMinutes() + Number(item));
-    date.push(date_0);
-    console.log(date_0);
-  });
-  console.log(date);
+  for (const item of feature){
+    let date_T =  new Date(date_0);
+    date_T.setMinutes(date_T.getMinutes() + Number(item));
+
+    let min = String(date_T.getMinutes());
+    if (min < 10){
+      min = "0" + min;  
+    }
+    date.push(String(date_T.getFullYear() + "-" + String(date_T.getMonth() + 1) +  "-"
+                     + date_T.getDate() + " " + date_T.getHours() + ":" + min));
+  }
   return date
 }
 
