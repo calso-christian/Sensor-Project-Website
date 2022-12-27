@@ -1,63 +1,57 @@
 width = 1250;
 height = 630;
 
-async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022-12-26 21:6"){
+async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022-12-18 16:30"){
+  let label = (sensor == 'Temperature')? '°C': '%';
+  const points = -20;
+  X = X.slice(points);
+  y = y.slice(points);
   X = feature_to_date(X, date_0);
-  X_predict = feature_to_date(X_predict, X[0]);
-    let plot_train = {
+  X_predict = feature_to_date(X_predict, date_0);
+  let plot_train = {
         x: X,
         y: y,
-        line: {color: "rgb(0,100,80)"}, 
         mode: 'lines+markers',
         type: 'scatter',
         name: "Reading",
         line: {
+          color: "rgb(0,0,0)",
           shape: 'spline',
           size: 3,  
         },
         marker: { 
-          size: 5,
+          size: 6,
           color: 'rgb(219, 64, 82)'
-        }};
-      let plot_predict = {
+  }};
+  let plot_predict = {
         x: X_predict,
         y: y_mean,
-        line: {color: "rgb(102,0,204)"}, 
+        hovertemplate: '%{y:.2f}' + label + '<extra></extra>',
         mode: 'lines+markers',
         type: 'scatter',
         name: "Forecast",
         line: {
-          shape: 'spline',
-          size: 3,  
-        },
-      };
+            color: "rgb(0,0,0)",
+            shape: 'spline',
+            size: 3,  
+          },
+          marker: { 
+            size: 6,
+            color: 'rgb(102,0,204)'
+  }};
       
-      let UpperCI = {
-        x: X_predict, 
-        y: y_UpperCI, 
-        fill: 'tonexty',
-        fillcolor: "rgba(0,100,80,0.2)", 
+  let CI = {
+        x: X_predict.concat(X_predict.slice().reverse()), 
+        y: y_LowerCI.concat(y_UpperCI.slice().reverse()),
+        fill: 'toself',
+        fillcolor: "rgba(102,0,204,0.2)", 
+        type: 'scatter',
         line: {color: "transparent"}, 
         name: "Uncertainty", 
-      };
-      
-      let LowerCI = {
-        x: X_predict, 
-        y: y_LowerCI, 
-        fill: 'tonexty',
-        fillcolor: "rgba(0,100,80,0.2)", 
-        line: {color: "transparent"}, 
-        name: "Uncertainty", 
-        showlegend: false, 
-      };
-      
-      let data = [plot_train, plot_predict, UpperCI, LowerCI];
-      let config = {responsive: true}
-      let layout = {
-        xaxis: { 
-          title: "Minute",
-          type: 'date'},
-        yaxis: { title: "Prediction"},  
+  };
+  let data = [CI, plot_train, plot_predict];
+  let config = {responsive: true}
+  let layout = {
         title: {
             text: sensor + ' Forecast',
             font: {
@@ -68,7 +62,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         },
         xaxis: {
             title: {
-              text: 'Time',
+              text: 'Date',
               font: {
                 size: 22,
                 color: '#000000'
@@ -77,17 +71,16 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
           },
           yaxis: {
             title: {
-              text: sensor,
+              text: label,
               font: {
                 size: 22,
                 color: '#000000'
               }
             }
-          }
+          },
+  };
 
-      };
-
-      Plotly.newPlot('chart-'+ sensor, data, layout, config);
+  await Plotly.newPlot('chart-'+ sensor, data, layout, config);
 }
 
 function feature_to_date(feature, date_0){
