@@ -8,7 +8,7 @@ const fs = require('fs').promises;
 const Data = require('./Data');
 const app = express();
 
-//listen to port (localhost:4000)
+//listen to port
 var server = app.listen(process.env.PORT, "0.0.0.0", () => { //Start the server, listening on port 4000.
     console.log("Listening to requests on port ", process.env.PORT);
 })
@@ -19,9 +19,6 @@ var io = require('socket.io')(server);
 //Send index.html page on GET /
 app.use(express.static('public')); 
 
-
-
-/*
 //connect serial communication to arduino
 const { SerialPort } = require('serialport'); 
 const { ReadlineParser } = require('@serialport/parser-readline');
@@ -32,9 +29,6 @@ const port = new SerialPort({
 const parser = port.pipe(new ReadlineParser({
     delimiter: '\n'
 }))
-*/
-//read data and callback function
-
 
 
 let jsonData;
@@ -51,72 +45,81 @@ async function Data_writer(obj){
     });
 }
 
+
+parser.on('data', (temp) => {
+    let obj = JSON.parse(temp);
+    let passTemp = obj["Temperature"];
+    let passHum = obj["Humidity"];
+
+    console.log(obj);
+    
+    const today = new Date();
+        let month = today.getMonth()+1; 
+        let day = today.getDate(); 
+        let year = today.getFullYear();
+        let hours = today.getHours(); 
+        let minute = today.getMinutes(); 
+        let seconds = today.getSeconds();
+        let passDate = year + "/" + month + "/" + day;
+        let passTime = hours+":"+minute+":"+seconds;
+        let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
+
+
+    let min = today.getMinutes();
+
+    io.sockets.emit('temp-update', passTemp);
+    io.sockets.emit('hum-update', passHum);
+    console.log(seconds);
+    if(seconds === 30 && (min === 0 || min === 15 || min === 30 || min === 45)) {
+        
+        jsonData.Temperature.X.date.push(dt);
+        jsonData.Temperature.y.push(passTemp);
+
+        jsonData.Humidity.X.date.push(dt);
+        jsonData.Humidity.y.push(passHum);
+
+        if(jsonData.Temperature.X.date?.[1]){
+            let date_0 =  jsonData.Temperature.X.date[0];
+            let date_T = dt;
+            jsonData.Temperature.X.feature.push(Math.floor((Math.abs(new Date(date_0) - new Date(date_T))/1000)/60));
+        }
+        else {
+            jsonData.Temperature.X.feature.push(0);
+        }
+
+        if(jsonData.Humidity.X.date?.[1]){
+            let date_0 =  jsonData.Humidity.X.date[0];
+            let date_T = dt;
+            jsonData.Humidity.X.feature.push(Math.floor((Math.abs(new Date(date_0) - new Date(date_T))/1000)/60));
+        }
+        else {
+            jsonData.Humidity.X.feature.push(0);
+        }
+
+        console.log(jsonData);
+        io.sockets.emit('Forecast', [jsonData, 'Temperature']);   
+        io.sockets.emit('Forecast', [jsonData, 'Humidity']);
+        Data_writer(jsonData);
+        
+    }
+
+});
+
 io.on('connection', async (socket) => {
 
     console.log(`Someone connected. ID: ${socket.id}`);
     await Data_reader();
+       
+
     io.sockets.emit('Forecast', [jsonData, 'Temperature']);   
-    io.sockets.emit('Forecast', [jsonData, 'Humidity']);   
-    
-    
-    /*
-    parser.on('data', (temp) => {
-        let obj = JSON.parse(temp);
-        let passTemp = obj["Temperature"];
-        let passHum = obj["Humidity"];
+    io.sockets.emit('Forecast', [jsonData, 'Humidity']);
 
-        console.log(obj);
-        
-        const today = new Date();
-            let month = today.getMonth()+1; 
-            let day = today.getDate(); 
-            let year = today.getFullYear();
-            let hours = today.getHours(); 
-            let minute = today.getMinutes(); 
-            let seconds = today.getSeconds();
-            let passDate = year + "/" + month + "/" + day;
-            let passTime = hours+":"+minute+":"+seconds;
-            let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
-    
-        //io.sockets.emit('temp', [Data['Temperature'], passTemp]); 
-        //io.sockets.emit('hum', {date: passDate, time: passTime, temp:passHum});
-    
-        let min = today.getMinutes();
-
-        io.sockets.emit('temp-update', passTemp);
-        io.sockets.emit('hum-update', passHum);
-        
-        if(min === 0 || min === 15 || min === 30 || min === 45) {
-            const dataSave = new schema({
-                Temperature: passTemp,
-                Humidity: passHum,
-                saveDate: dt,
-            });
-            dataSave.save()
-                .then((result) => console.log(result))
-                .catch((err) => console.log(err));
-    
-            jsonData.Temperature.X.date.push(dt);
-            jsonData.Temperature.y.push(passTemp);
-
-            if(jsonData.Temperature.X.date?.[1]){
-                let date_0 =  jsonData.Temperature.X.date[0];
-                let date_T = dt;
-                jsonData.Temperature.X.feature.push(Math.floor((Math.abs(new Date(date_0) - new Date(date_T))/1000)/60));
-            }
-            else {
-                jsonData.Temperature.X.feature.push(0);
-            }
-
-            console.log(jsonData);
-            Data_writer(jsonData);
-    
-        }
-        
-    });*/
-
-
+    socket.on('disconnect', () => {
+         console.log(`Someone disconnected. ID: ${socket.id}`);
+    })
 })
+
+
 
 
 //ACCUMULATION HERE
