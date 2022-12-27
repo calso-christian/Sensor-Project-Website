@@ -2,10 +2,8 @@ width = 1250;
 height = 630;
 
 async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022-12-26 21:6"){
-
   X = feature_to_date(X, date_0);
   X_predict = feature_to_date(X_predict, X[0]);
-  console.log(X, X_predict);
     let plot_train = {
         x: X,
         y: y,
@@ -25,13 +23,13 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         x: X_predict,
         y: y_mean,
         line: {color: "rgb(0,100,80)"}, 
-        mode: "lines", 
+        mode: 'lines+markers',
+        type: 'scatter',
         name: "Forecast",
         line: {
           shape: 'spline',
-          color: 'rgb(55, 128, 191)',
-          width: 3
-        }
+          size: 3,  
+        },
       };
       
       let UpperCI = {
