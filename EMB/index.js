@@ -40,7 +40,7 @@ const parser = port.pipe(new ReadlineParser({
 let jsonData;
 
 async function Data_reader(){
-    jsonData = JSON.parse(await fs.readFile('./Data.json', 'utf-8'));
+    jsonData = JSON.parse(await fs.readFile('./data.json', 'utf-8'));
 }
 
 async function Data_writer(obj){
@@ -55,7 +55,8 @@ io.on('connection', async (socket) => {
 
     console.log(`Someone connected. ID: ${socket.id}`);
     await Data_reader();
-    io.sockets.emit('Temperature', jsonData.Temperature);   
+    io.sockets.emit('Forecast', [jsonData, 'Temperature']);   
+    io.sockets.emit('Forecast', [jsonData, 'Humidity']);   
     
     /*
     parser.on('data', (temp) => {
