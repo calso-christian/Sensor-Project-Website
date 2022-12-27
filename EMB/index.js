@@ -58,6 +58,7 @@ io.on('connection', async (socket) => {
     io.sockets.emit('Forecast', [jsonData, 'Temperature']);   
     io.sockets.emit('Forecast', [jsonData, 'Humidity']);   
     
+    
     /*
     parser.on('data', (temp) => {
         let obj = JSON.parse(temp);
