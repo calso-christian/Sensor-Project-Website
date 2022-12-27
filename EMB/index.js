@@ -75,6 +75,7 @@ io.on('connection', async (socket) => {
 
     console.log(`Someone connected " ${socket}`);
     await Data_reader();
+    io.sockets.emit('Temperature', jsonData.Temperature);
     
     /*parser.on('data', (temp) => {
         let obj = JSON.parse(temp);
@@ -129,7 +130,7 @@ io.on('connection', async (socket) => {
     });*/
 
 
-});
+})
 
 
 //ACCUMULATION HERE

@@ -15,23 +15,25 @@ this.onmessage = function(e) {
     (async() => {
         await tf.ready 
         tf.setBackend('webgl');
-        main(e.data);
+        main(e.data[0], e.data[1]);
       })();
 };
 
-async function main(sensor){
-    LINK = "https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Sensor%20Readings.csv";
-    data = await SampleForecast(LINK, sensor);
-    self.postMessage({
-        X_predict: data.X_predict,
-        X: data.X,
-        y: data.y,
-        y_UpperCI: data.y_UpperCI,
-        y_LowerCI: data.y_LowerCI,
-        y_mean: data.y_mean,
-        y_cov: data.y_cov,
-        sensor: data.sensor,
-    });
+async function main(sensor, data){
+    let LINK = "https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Sensor%20Readings.csv";
+    if (data == 0){
+        data = await SampleForecast(LINK, sensor);
+        self.postMessage({
+            X_predict: data.X_predict,
+            X: data.X,
+            y: data.y,
+            y_UpperCI: data.y_UpperCI,
+            y_LowerCI: data.y_LowerCI,
+            y_mean: data.y_mean,
+            y_cov: data.y_cov,
+            sensor: data.sensor,
+        });
+    }
 }
 
 
