@@ -1,12 +1,8 @@
-socket.on('Temperature', async function(data) {
-    gauge2.setValueAnimated(data.y[data.y.length - 1], 1);
-    if (data.X.date?.[1]){
-        worker.postMessage(['Temperature', data]);
-        /*forecast(data[0], 'Temperature').then(()=>{
-            gauge2.setValueAnimated(data[1], 1);
-        });*/
+socket.on('Forecast', async function(data) {
+    //gauge2.setValueAnimated(data.y[data.y.length - 1], 1);
+    if (data[0][data[1]].X.date?.[1]){
+        worker.postMessage([data[1], data[0][data[1]]]);
     }
-
 })
 
 let done = 0;

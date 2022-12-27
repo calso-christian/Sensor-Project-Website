@@ -76,7 +76,8 @@ io.on('connection', async (socket) => {
     console.log(`Someone connected " ${socket}`);
     await Data_reader();
 
-    io.sockets.emit('Temperature', jsonData.Temperature);
+    io.sockets.emit('Forecast', [jsonData, 'Temperature']);
+    io.sockets.emit('Forecast', [jsonData, 'Humidity']);
     
     /*parser.on('data', (temp) => {
         let obj = JSON.parse(temp);
