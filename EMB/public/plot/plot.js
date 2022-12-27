@@ -1,17 +1,17 @@
 width = 1250;
 height = 630;
 
-async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022-12-26 21:6"){
+async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022-12-18 16:30"){
   X = feature_to_date(X, date_0);
   X_predict = feature_to_date(X_predict, X[0]);
     let plot_train = {
         x: X,
         y: y,
-        line: {color: "rgb(0,100,80)"}, 
         mode: 'lines+markers',
         type: 'scatter',
         name: "Reading",
         line: {
+          color: "rgb(0,0,0)",
           shape: 'spline',
           size: 3,  
         },
@@ -22,21 +22,24 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
       let plot_predict = {
         x: X_predict,
         y: y_mean,
-        line: {color: "rgb(102,0,204)"}, 
         mode: 'lines+markers',
         type: 'scatter',
         name: "Forecast",
         line: {
-          shape: 'spline',
-          size: 3,  
-        },
-      };
+            color: "rgb(0,0,0)",
+            shape: 'spline',
+            size: 3,  
+          },
+          marker: { 
+            size: 5,
+            color: 'rgb(102,0,204)'
+          }};
       
       let UpperCI = {
         x: X_predict, 
         y: y_UpperCI, 
         fill: 'tonexty',
-        fillcolor: "rgba(0,100,80,0.2)", 
+        fillcolor: "rgba(102,0,204,0.2)", 
         line: {color: "transparent"}, 
         name: "Uncertainty", 
       };
@@ -45,7 +48,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         x: X_predict, 
         y: y_LowerCI, 
         fill: 'tonexty',
-        fillcolor: "rgba(0,100,80,0.2)", 
+        fillcolor: "rgba(102,0,204,0.2)", 
         line: {color: "transparent"}, 
         name: "Uncertainty", 
         showlegend: false, 
