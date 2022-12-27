@@ -110,7 +110,7 @@ body{
 
 .gaugerow{
   margin-top: 50px;
-  margin-left: 2px;
+  margin-left: 25px;
 }
 .gauges h3{
   font-weight: normal;
@@ -225,6 +225,10 @@ body{
     padding-top: 5px;
     line-height: 25px;
     font-size: 18px;
+  }
+
+  .gaugerow{
+    margin-left: 5px;
   }
 
   /*WIP ang finnicky ng logos at different sizes*/
