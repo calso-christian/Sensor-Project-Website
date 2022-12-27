@@ -8,7 +8,6 @@ const navLinks = document.querySelectorAll('nav a').forEach(link =>{
 
 const timeElement = document.querySelector(".time");
 const dateElement = document.querySelector(".date");
-const meridianElement = document.querySelector(".meridian");
 
 /**
  * @param {Date} date
@@ -23,10 +22,7 @@ function formatTime(date) {
     .padStart(2, "0")} ${isAm ? "AM" : "PM"}`;
 }
 
-function meridian(date) {
-    const isAm = date.getHours() < 12;
-    return `${isAm ? "AM" : "PM"}`;
-  }
+
 /**
  * @param {Date} date
  */
@@ -65,5 +61,4 @@ setInterval(() => {
 
   timeElement.textContent = formatTime(now);
   dateElement.textContent = formatDate(now);
-  meridianElement.textContent = meridian(now);
 }, 200);
