@@ -40,7 +40,7 @@ async function connect() {
 connect();
 */
 
-
+/*
 
 //connect serial communication to arduino
 const { SerialPort } = require('serialport'); 
@@ -51,7 +51,7 @@ const port = new SerialPort({
 });
 const parser = port.pipe(new ReadlineParser({
     delimiter: '\n'
-}))
+}))*/
 
 //read data and callback function
 
@@ -76,13 +76,10 @@ io.on('connection', async (socket) => {
     console.log(`Someone connected " ${socket}`);
     await Data_reader();
     
-    
-    
-
-    parser.on('data', (temp) => {
-        var obj = JSON.parse(temp);
-        var passTemp = obj["Temperature"];
-        var passHum = obj["Humidity"];
+    /*parser.on('data', (temp) => {
+        let obj = JSON.parse(temp);
+        let passTemp = obj["Temperature"];
+        let passHum = obj["Humidity"];
 
         console.log(obj);
         
@@ -97,13 +94,10 @@ io.on('connection', async (socket) => {
             let passTime = hours+":"+minute+":"+seconds;
             let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
     
-    
         //io.sockets.emit('temp', [Data['Temperature'], passTemp]); 
-    
         //io.sockets.emit('hum', {date: passDate, time: passTime, temp:passHum});
-        
     
-        var min = today.getMinutes();
+        let min = today.getMinutes();
         
         if(min === 0 || min === 15 || min === 30 || min === 45) {
             /*const dataSave = new schema({
@@ -113,7 +107,7 @@ io.on('connection', async (socket) => {
             });
             dataSave.save()
                 .then((result) => console.log(result))
-                .catch((err) => console.log(err));*/
+                .catch((err) => console.log(err));
     
             jsonData.Temperature.X.date.push(dt);
             jsonData.Temperature.y.push(passTemp);
@@ -132,10 +126,10 @@ io.on('connection', async (socket) => {
     
         }
         
-    });
+    });*/
 
 
-}) 
+});
 
 
 //ACCUMULATION HERE

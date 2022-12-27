@@ -30,20 +30,10 @@ async function main(sensor){
         y_LowerCI: data.y_LowerCI,
         y_mean: data.y_mean,
         y_cov: data.y_cov,
-        sensor: data.sensor
+        sensor: data.sensor,
     });
 }
 
-async function forecast(data, sensor){
-    let points = 1000;
-    let X_train = tf.tensor(data.X.feature).reshape([-1, 1]);
-    let y_train = tf.tensor(data.y).reshape([-1, 1]);
-    let start = data.X.feature.length - 1;
-    let X_predict = tf.linspace(start, start + 15, points).reshape([-1,1]);
-    let obj = new GaussianProcessRegression(params[sensor], new model().Kernel);
-    [y_mean, y_cov] = await obj.Condition(X_predict, X_train, y_train);
-    await plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id='chart-' + sensor);
-}
 
 async function SampleForecast(LINK, sensor){
     let X = [], y = [], obj, X_predict, y_mean, y_cov, y_std;
@@ -75,4 +65,19 @@ async function SampleForecast(LINK, sensor){
         sensor: sensor
     };
 };
+
+
+
+
+
+async function forecast(data, sensor){
+    let points = 1000;
+    let X_train = tf.tensor(data.X.feature).reshape([-1, 1]);
+    let y_train = tf.tensor(data.y).reshape([-1, 1]);
+    let start = data.X.feature.length - 1;
+    let X_predict = tf.linspace(start, start + 15, points).reshape([-1,1]);
+    let obj = new GaussianProcessRegression(params[sensor], new model().Kernel);
+    [y_mean, y_cov] = await obj.Condition(X_predict, X_train, y_train);
+    await plot_Predictions(obj, X_predict, X_train, y_train, y_mean, y_cov, id='chart-' + sensor);
+}
 

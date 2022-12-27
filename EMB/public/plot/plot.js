@@ -1,7 +1,8 @@
 width = 1250;
 height = 630;
 
-async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor){
+async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022/12/26 21:6"){
+  feature_to_date(X, date_0);
 
     let plot_train = {
         x: X,
@@ -53,24 +54,21 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
       };
       
       let data = [plot_train, plot_predict, UpperCI, LowerCI];
+      let config = {responsive: true}
       let layout = {
-        responsive: true,
         xaxis: { title: "Minute"},
         yaxis: { title: "Prediction"},  
         title: {
             text: sensor + ' Forecast',
             font: {
-              size: 32
+              size: 29
             },
             xref: 'paper',
             x: 0.05,
         },
-        width: width,
-        height: height,
-
         xaxis: {
             title: {
-              text: 'Minute',
+              text: 'Time',
               font: {
                 size: 22,
                 color: '#000000'
@@ -88,6 +86,19 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
           }
 
       };
-      Plotly.newPlot('chart-' + sensor, data, layout);
+
+      Plotly.newPlot('chart-'+ sensor, data, layout, config);
+}
+
+function feature_to_date(feature, date_0){
+  let date = [];
+  date_0 = new Date(date_0);
+  feature.forEach( function(item){
+    date_0.setMinutes(date_0.getMinutes() + Number(item));
+    date.push(date_0);
+    console.log(date_0);
+  });
+  console.log(date);
+  return date
 }
 

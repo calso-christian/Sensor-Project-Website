@@ -13,7 +13,7 @@ worker.postMessage('Temperature');
 worker.postMessage('Humidity');
 worker.addEventListener("message", (event) => {
 	let data = event.data;
-    plot_Predictions(data.X_predict, data.X, data.y, data.y_UpperCI, data.y_LowerCI, data.y_mean, data.sensor);
+    plot_Predictions(data.X_predict, data.X, data.y, data.y_UpperCI, data.y_LowerCI, data.y_mean, data.sensor, data.date_init);
     
 });
 
