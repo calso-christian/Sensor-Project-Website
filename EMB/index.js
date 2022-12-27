@@ -73,7 +73,7 @@ async function Data_writer(obj){
 
 io.on('connection', async (socket) => {
 
-    console.log(`Someone connected " ${socket}`);
+    console.log(`Someone connected ${socket.Data}`);
     await Data_reader();
     io.sockets.emit('Temperature', jsonData.Temperature);
     
