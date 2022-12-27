@@ -74,24 +74,4 @@
   );
 
 
-var chartT = new Highcharts.Chart({
-  chart:{ renderTo : 'chart-water' },
-  title: { text: '' },
-  series: [{
-    showInLegend: false,
-    data: []
-  }],
-  plotOptions: {
-    line: { animation: false,
-      dataLabels: { enabled: true }
-    },
-    series: { color: '#059e8a' }
-  },
-  xAxis: { title: {text: "Time"}
-  },
-  yAxis: {
-    title: { text: 'Water Level' }
-  },
-  credits: { enabled: false }
-});
 
