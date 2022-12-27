@@ -242,6 +242,10 @@ body{
   }
 }
 
+.navbar-custom {
+  color:#6610f2;
+}
+
 /* Responsiveness 
 
 @media screen and (min-width:750px){

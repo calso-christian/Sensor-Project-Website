@@ -44,7 +44,7 @@ async function Data_reader(){
 }
 
 async function Data_writer(obj){
-    await fs.writeFile('./Data.json', JSON.stringify(obj,null,2), err => {
+    await fs.writeFile('./data.json', JSON.stringify(obj,null,2), err => {
         if(err){
             console.log(err);
         }
