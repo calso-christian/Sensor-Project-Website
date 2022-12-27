@@ -21,7 +21,7 @@ app.use(express.static('public'));
 
 
 
-/*
+
 //connect serial communication to arduino
 const { SerialPort } = require('serialport'); 
 const { ReadlineParser } = require('@serialport/parser-readline');
@@ -32,7 +32,7 @@ const port = new SerialPort({
 const parser = port.pipe(new ReadlineParser({
     delimiter: '\n'
 }))
-*/
+
 //read data and callback function
 
 
@@ -59,7 +59,10 @@ io.on('connection', async (socket) => {
     io.sockets.emit('Forecast', [jsonData, 'Humidity']);   
     
     
+<<<<<<< Updated upstream
     /*
+=======
+>>>>>>> Stashed changes
     parser.on('data', (temp) => {
         let obj = JSON.parse(temp);
         let passTemp = obj["Temperature"];
@@ -86,18 +89,13 @@ io.on('connection', async (socket) => {
         io.sockets.emit('temp-update', passTemp);
         io.sockets.emit('hum-update', passHum);
         
-        if(min === 0 || min === 15 || min === 30 || min === 45) {
-            const dataSave = new schema({
-                Temperature: passTemp,
-                Humidity: passHum,
-                saveDate: dt,
-            });
-            dataSave.save()
-                .then((result) => console.log(result))
-                .catch((err) => console.log(err));
-    
+        if(min === 0 || min === 15 || min === 30 || min === 45 || min === 3) {
+        
             jsonData.Temperature.X.date.push(dt);
             jsonData.Temperature.y.push(passTemp);
+
+            jsonData.Humidity.X.date.push(dt);
+            jsonData.Humidity.y.push(passHum);
 
             if(jsonData.Temperature.X.date?.[1]){
                 let date_0 =  jsonData.Temperature.X.date[0];
@@ -108,12 +106,22 @@ io.on('connection', async (socket) => {
                 jsonData.Temperature.X.feature.push(0);
             }
 
+            if(jsonData.Humidity.X.date?.[1]){
+                let date_0 =  jsonData.Humidity.X.date[0];
+                let date_T = dt;
+                jsonData.Humidity.X.feature.push(Math.floor((Math.abs(new Date(date_0) - new Date(date_T))/1000)/60));
+            }
+            else {
+                jsonData.Temperature.X.feature.push(0);
+            }
+
+
             console.log(jsonData);
             Data_writer(jsonData);
     
         }
         
-    });*/
+    });
 
 
 })
