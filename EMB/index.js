@@ -20,27 +20,7 @@ var io = require('socket.io')(server);
 app.use(express.static('public')); 
 
 
-/*
-//connect to database
-const connectionParams = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}
-async function connect() {
-    try {
-        await mongoose.connect(process.env.dbURI, connectionParams);
-        console.log('Connected to Database');
-    }
-    catch(err){
-        console.error(err);
-    } 
-}
 
-//call function to connect to database
-connect();
-*/
-
-/*
 
 //connect serial communication to arduino
 const { SerialPort } = require('serialport'); 
@@ -51,7 +31,7 @@ const port = new SerialPort({
 });
 const parser = port.pipe(new ReadlineParser({
     delimiter: '\n'
-}))*/
+}))
 
 //read data and callback function
 
@@ -73,13 +53,11 @@ async function Data_writer(obj){
 
 io.on('connection', async (socket) => {
 
-    console.log(`Someone connected " ${socket}`);
+    console.log(`Someone connected. ID: ${socket.id}`);
     await Data_reader();
-
-    io.sockets.emit('Forecast', [jsonData, 'Temperature']);
-    io.sockets.emit('Forecast', [jsonData, 'Humidity']);
+    io.sockets.emit('Temperature', jsonData.Temperature);   
     
-    /*parser.on('data', (temp) => {
+    parser.on('data', (temp) => {
         let obj = JSON.parse(temp);
         let passTemp = obj["Temperature"];
         let passHum = obj["Humidity"];
@@ -101,9 +79,12 @@ io.on('connection', async (socket) => {
         //io.sockets.emit('hum', {date: passDate, time: passTime, temp:passHum});
     
         let min = today.getMinutes();
+
+        io.sockets.emit('temp-update', passTemp);
+        io.sockets.emit('hum-update', passHum);
         
         if(min === 0 || min === 15 || min === 30 || min === 45) {
-            /*const dataSave = new schema({
+            const dataSave = new schema({
                 Temperature: passTemp,
                 Humidity: passHum,
                 saveDate: dt,
@@ -129,7 +110,7 @@ io.on('connection', async (socket) => {
     
         }
         
-    });*/
+    });
 
 
 })

@@ -5,6 +5,14 @@ socket.on('Forecast', async function(data) {
     }
 })
 
+socket.on('temp-update', async (data) => {
+    gauge2.setValueAnimated(data,1);
+})
+
+socket.on('hum-update', async (data) => {
+    gauge1.setValueAnimated(data,1);
+})
+
 const worker = new Worker('index.worker.js');
 /*worker.postMessage(['Temperature', 0]);
 worker.postMessage(['Humidity', 0]);*/
