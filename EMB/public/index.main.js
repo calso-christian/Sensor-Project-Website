@@ -5,8 +5,6 @@ socket.on('Forecast', async function(data) {
     }
 })
 
-let done = 0;
-
 const worker = new Worker('index.worker.js');
 /*worker.postMessage(['Temperature', 0]);
 worker.postMessage(['Humidity', 0]);*/

@@ -58,6 +58,7 @@ async function forecast(data, sensor){
     let X = await tf.tensor(data.X.feature).reshape([-1,1]);
     let y = await tf.tensor(data.y).reshape([-1,1])
     let X_predict = tf.linspace(start, start + forward, resolution).reshape([-1,1]);
+    X_predict = tf.range(start, start + forward, 1).reshape([-1,1]);
     obj = new GaussianProcessRegression(params[sensor], new model().Kernel);
     [y_mean, y_cov] = await obj.Condition(X_predict, X, y);
     y_std = tf.sqrt(obj.getDiag(y_cov, y_cov.shape[0]));
