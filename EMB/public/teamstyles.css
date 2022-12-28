@@ -13,9 +13,9 @@ body{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border: 10px solid #9282F4;
-    width: 200px;
-    height: 200px;
+    border: 15px solid #9282F4;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     margin-top: 33px;
 }
@@ -35,16 +35,54 @@ h5{
     font-size: 18px;
 }
 
+.card-container{
+    perspective: 1000px;
+    position: relative;
+    height: 500px;
+}
+
+.card-container:hover .card-front{
+    transform: rotateY(180deg);
+}
+
+.card-container:hover .card-back{
+    transform: rotateY(0deg);
+}
+
+.card-back{
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+.card-front{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .card{
+    transition: all 0.9s;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+}
+
+.card-front, .card-back{
+    position: absolute;
     background: linear-gradient(135deg, hsla(0, 0%, 100%, 1) 0%, hsla(248, 83%, 86%, 1) 100%);
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.25);
-    transition: all 0.3s ease 0s;
 }
 
-.card:hover{
-    transform: translateY(-10px);
+.card-back p{
+    margin-top: 15px;
+    color: #4B36C8;
+    text-align: center;
+    vertical-align: middle;
+    font-size: x-large;
+    padding: 0 10px;
 }
 
 .main-text{
@@ -99,4 +137,4 @@ h5{
 .current{
     text-decoration-line: underline;  
     text-decoration-thickness: 5px;
-}
+} 
