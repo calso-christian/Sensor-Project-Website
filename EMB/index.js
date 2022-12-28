@@ -1,14 +1,15 @@
+//globals
 require('dotenv').config()
 let jsonData;
 
+//requirements
 const express = require('express');
-const mongoose = require('mongoose');
-const schema = require('./schema');
-
 const fs = require('fs').promises;
 const Data = require('./Data');
 const app = express();
 let minify = require('express-minify');
+
+//use minify for express app
 app.use(minify());
 
 //listen to port
@@ -24,6 +25,7 @@ app.use(express.static('public'));
 //connect serial communication to arduino
 const { SerialPort } = require('serialport'); 
 const { ReadlineParser } = require('@serialport/parser-readline');
+const { json } = require('express');
 const port = new SerialPort({
     path: 'COM3',
     baudRate: 9600
@@ -32,8 +34,17 @@ const parser = port.pipe(new ReadlineParser({
     delimiter: '\n'
 }))
 
+//Event listener for Arduino
 
-parser.on('data', (temp) => {
+
+parser.on('data', async (temp) => {
+
+    await Data_reader();
+    if(jsonData.Temperature.X.date.length > 10) {
+        Data_shift();
+    }
+
+
     let obj = JSON.parse(temp);
     let passTemp = obj["Temperature"];
     let passHum = obj["Humidity"];
@@ -49,14 +60,23 @@ parser.on('data', (temp) => {
         let seconds = today.getSeconds();
         let passDate = year + "/" + month + "/" + day;
         let passTime = hours+":"+minute+":"+seconds;
-        let dt = year+"/"+month+"/"+day+" "+hours+":"+minute;
-
+        let dt = year+"-"+month+"-"+day+" "+hours+":"+minute;
+        
     let min = today.getMinutes();
+    let cond = min % 10;
 
     io.sockets.emit('temp-update', passTemp);
     io.sockets.emit('hum-update', passHum);
-    console.log(seconds);
-    if(seconds === 30 && (min === 0 || min === 15 || min === 30 || min === 45)) {
+    console.log(`Seconds: ${seconds} JSON Length: ${jsonData.Temperature.X.date.length} Modulo: ${cond}`);
+
+    if(jsonData.Temperature.X.date.length > 20) {
+        Data_shift();
+    }
+
+    if(seconds === 30 && (cond === 0)) {
+
+        
+        
         jsonData.Temperature.X.date.push(dt);
         jsonData.Temperature.y.push(passTemp);
         jsonData.Humidity.X.date.push(dt);
@@ -87,6 +107,8 @@ parser.on('data', (temp) => {
     }
 });
 
+//
+
 
 io.on('connection', async (socket) => {
     console.log(`Someone connected. ID: ${socket.id}`);
@@ -113,10 +135,19 @@ async function Data_shift(){
         jsonData[sensor].X.feature = await jsonData[sensor].X.feature.map(x => x - init);
     }
     await fs.writeFile('./data.json', JSON.stringify(jsonData, null,2));
+
+    console.log("shifted");
 }
 
 async function Data_reader(){
-    jsonData = JSON.parse(await fs.readFile('./data.json', 'utf-8'));
+    try {
+        jsonData = JSON.parse(await fs.readFile('./data.json', 'utf-8'));
+        console.log("JSON file succesfully read");
+    }
+    catch(error) {
+        console.log(error);
+    }
+    
 }
 
 async function Data_writer(obj){
