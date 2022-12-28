@@ -1,6 +1,3 @@
-width = 1250;
-height = 630;
-
 async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022-12-18 16:30"){
   let label = (sensor == 'Temperature')? '°C': '%';
   const points = -20;
@@ -11,6 +8,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
   let plot_train = {
         x: X,
         y: y,
+        hovertemplate: '%{y:.2f}' + label + '<extra></extra>',
         mode: 'lines+markers',
         type: 'scatter',
         name: "Reading",
@@ -44,10 +42,10 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         x: X_predict.concat(X_predict.slice().reverse()), 
         y: y_LowerCI.concat(y_UpperCI.slice().reverse()),
         fill: 'toself',
-        fillcolor: "rgba(102,0,204,0.2)", 
+        fillcolor: "rgba(102,0,204,0.16)", 
         type: 'scatter',
         line: {color: "transparent"}, 
-        name: "Uncertainty", 
+        name: "Uncertainty",
   };
   let data = [CI, plot_train, plot_predict];
   let config = {responsive: true}
@@ -55,6 +53,8 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         title: {
             text: sensor + ' Forecast',
             font: {
+              family: 'Secular',
+              color: '#3645c8',
               size: 29
             },
             xref: 'paper',
@@ -64,8 +64,9 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
             title: {
               text: 'Date',
               font: {
+                family: 'Secular',
                 size: 22,
-                color: '#000000'
+                color: '#3645c8'
               }
             },
           },
@@ -73,13 +74,13 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
             title: {
               text: label,
               font: {
+                family: 'Secular',
                 size: 22,
-                color: '#000000'
+                color: '#3645c8'
               }
             }
           },
   };
-
   await Plotly.newPlot('chart-'+ sensor, data, layout, config);
 }
 
@@ -88,7 +89,6 @@ function feature_to_date(feature, date_0){
   for (const item of feature){
     let date_T =  new Date(date_0);
     date_T.setMinutes(date_T.getMinutes() + Number(item));
-
     let min = String(date_T.getMinutes());
     if (min < 10){
       min = "0" + min;  
