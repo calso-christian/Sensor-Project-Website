@@ -21,7 +21,6 @@ let io = require('socket.io')(server);
 //Send index.html page on GET /
 app.use(express.static('public')); 
 
-/*
 
 //connect serial communication to arduino
 const { SerialPort } = require('serialport'); 
@@ -41,7 +40,7 @@ const parser = port.pipe(new ReadlineParser({
 parser.on('data', async (temp) => {
 
     await Data_reader();
-    if(jsonData.Temperature.X.date.length > 10) {
+    if(jsonData.Temperature.X.date.length > 1000) {
         Data_shift();
     }
 
@@ -70,13 +69,8 @@ parser.on('data', async (temp) => {
     io.sockets.emit('hum-update', passHum);
     console.log(`Seconds: ${seconds} JSON Length: ${jsonData.Temperature.X.date.length} Modulo: ${cond}`);
 
-    if(jsonData.Temperature.X.date.length > 20) {
-        Data_shift();
-    }
 
     if(seconds === 30 && (cond === 0)) {
-
-        
         
         jsonData.Temperature.X.date.push(dt);
         jsonData.Temperature.y.push(passTemp);
