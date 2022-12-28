@@ -27,8 +27,8 @@ async function forecast(data, sensor){
     let start = data.X.feature[data.X.feature.length - 1] + 1;
     let X = await tf.tensor(data.X.feature).reshape([-1,1]);
     let y = await tf.tensor(data.y).reshape([-1,1])
-    let X_predict = tf.range(start, start + forward, 1).reshape([-1,1]);
-    obj = new GaussianProcessRegression(params[sensor], new model().Kernel);
+    let X_predict = await tf.range(start, start + forward, 1).reshape([-1,1]);
+    obj = new GaussianProcessRegression(params[sensor]);
     [y_mean, y_cov] = await obj.Condition(X_predict, X, y);
     y_cov = await y_cov.array();
     y_cov = y_cov.map(x => x.map( x => x || 0));
@@ -56,17 +56,17 @@ async function SampleForecast(LINK, sensor){
         let i = X.length - 2;
         let start = X[i][0];
         let forward = 12600;
-
         X = await tf.slice(X, 0, i).reshape([-1,1]);
         y = await tf.slice(y, 0, i).reshape([-1,1]);
         X_predict = tf.range(start, start + forward, 1).reshape([-1,1]);
-        obj = new GaussianProcessRegression(params[sensor], new model().Kernel);
+        obj = new GaussianProcessRegression(params[sensor]);
         [y_mean, y_cov] = await obj.Condition(X_predict, X, y);
         y_cov = await y_cov.array();
         y_cov = y_cov.map(x => x.map( x => x || 0));
         y_cov = tf.tensor(y_cov);
         y_std = tf.sqrt(obj.getDiag(y_cov, y_cov.shape[0]));
     });
+
     
     self.postMessage( {
         X_predict: await X_predict.squeeze().array(),
