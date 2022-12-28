@@ -20,6 +20,7 @@ let io = require('socket.io')(server);
 //Send index.html page on GET /
 app.use(express.static('public')); 
 
+/*
 
 //connect serial communication to arduino
 const { SerialPort } = require('serialport'); 
@@ -86,7 +87,7 @@ parser.on('data', (temp) => {
         Data_writer(jsonData);
     }
 });
-
+*/
 
 io.on('connection', async (socket) => {
     console.log(`Someone connected. ID: ${socket.id}`);
@@ -98,7 +99,6 @@ io.on('connection', async (socket) => {
     })
 })
 
-//Utils_data.Data_Shift()
 
 
 
