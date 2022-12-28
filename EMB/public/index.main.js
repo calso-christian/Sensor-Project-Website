@@ -3,9 +3,9 @@ socket.on('Forecast', async function(data) {
     //gauge2.setValueAnimated(data.y[data.y.length - 1], 1);
     if (data[0][data[1]].X.date?.[1]){
         const worker = new Worker('index.worker.js');
-        worker.addEventListener("message", async (event) => {
+        worker.addEventListener("message", (event) => {
             let data = event.data;
-            await plot_Predictions(data.X_predict, data.X, data.y, data.y_UpperCI, data.y_LowerCI, data.y_mean, data.sensor);
+            plot_Predictions(data.X_predict, data.X, data.y, data.y_UpperCI, data.y_LowerCI, data.y_mean, data.sensor);
             l -= 1;
             if (l == 0){
                 tf.disposeVariables();
