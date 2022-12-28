@@ -8,7 +8,8 @@ const schema = require('./schema');
 const fs = require('fs').promises;
 const Data = require('./Data');
 const app = express();
-
+let minify = require('express-minify');
+app.use(minify());
 
 //listen to port
 let server = app.listen(process.env.PORT, "0.0.0.0", () => { //Start the server, listening on port 4000.
