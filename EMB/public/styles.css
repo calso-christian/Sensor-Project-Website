@@ -211,6 +211,9 @@ body{
 
 /* Responsiveness */
 @media only screen and (max-width: 600px) {
+  .firstrow{
+    width: 100%; /*Makes girl logo and clock go to a new row at 1000 pixels*/
+  }
   .greetings{
     text-align: center;
     padding-right: 25px;
@@ -250,15 +253,156 @@ body{
   @media only screen and (max-width: 1600px){
   .gcont{
     margin-bottom: 35px;
+    width: 375px;
+    height: 225px;     /*eeeeeeeeeeeeeeeeeeeeeee*/
+  }
+
+  .gauge-container{
+    width: 150px;
+    height: 150px;
+  }
+
+  #hlogo, #tlogo, #wlogo{
+    width: 120px;
+    height: 120px;
+  }
+  #wlogo{
+    margin-top: 10px;
   }
 }
 
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 1400px){
+  .gcont{
+    margin-bottom: 35px;
+    width: 350px;
+    height: 200px;     /*eeeeeeeeeeeeeeeeeeeeeee*/
+  }
+}
+
+
+@media only screen and (max-width: 1350px){
+  .greetings{
+    padding-right: 15px;
+  }
+  .gcont{
+    margin-bottom: 35px;
+    width: 330px;
+    height: 180px;     /*eeeeeeeeeeeeeeeeeeeeeee*/
+  }
+
+  .gauge-container{
+    width: 130px;
+    height: 130px;
+  }
+
+  #hlogo, #tlogo, #wlogo{
+    width: 100px;
+    height: 100px;
+  }
+  #wlogo{
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 1255px) {
+  .girl{
+    width: 274px;
+    height: 180px;
+    top: -100px;
+    left: 75px;
+  }  
+
+  .gcont{
+    margin-bottom: 35px;
+    width: 310px;
+    height: 180px;     /*eeeeeeeeeeeeeeeeeeeeeee*/
+  }
+
+  .gauge-container{
+    width: 110px;
+    height: 110px;
+  }
+
+  #hlogo, #tlogo, #wlogo{
+    width: 100px;
+    height: 100px;
+  }
+
+  #wlogo{
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 1255px) {
+  .gcont{
+    width: 290px;
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  .date{
+    font-size: 22px;
+  }
+
+  .date-card h1{
+    font-size: 40px;
+  }
+
+  .girl{
+    width: 214px;
+    height: 150px;
+    top: -90px;
+    left: 40px;
+  }  
+
+  .greetings h1{
+    font-size: 30px;
+  }
+  
+  .greetings{
+    padding-top: 0px;
+  }
+
+  .greetings p{
+    font-size: 20px;
+  }
+  .gcont{
+    width: 270px;
+    height: 160px;
+  }
+  #hlogo, #tlogo, #wlogo{
+    width: 80px;
+    height: 80px;
+    margin-left: 15px;
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  .gcont{
+    width: 250px;
+  }
+}
+
+@media only screen and (max-width: 995px) {
+    .gcont{
+      width: 220px;
+    }
+    .gauge-container{
+      width: 90px;
+      height: 90px;
+    }
+}
+
+@media only screen and (max-width: 870px) { /*go back to bigger sizing*/
+  .gcont{
+    width: 400px;
+    height: 249px;
+  }
+
   .firstrow{
     width: 100%; /*Makes girl logo and clock go to a new row at 1000 pixels*/
   }
 }
-
 
 
 @media only screen and (max-width: 498px) {

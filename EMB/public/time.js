@@ -29,18 +29,18 @@ function formatDate(date) {
     "Sat"
   ];
   const MONTHS = [
-    "January",
-    "February",
+    "Jan",
+    "Feb",
     "March",
     "April",
     "May",
     "June",
     "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec"
   ];
 
   return `${DAYS[date.getDay()]}, ${
