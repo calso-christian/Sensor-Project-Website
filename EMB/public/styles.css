@@ -9,6 +9,7 @@ body{
   font-style: normal;
   width: 85%; /*if the browser gets too small, this makes sure there is still space*/
   margin: 0 auto;
+  padding-bottom: 50px;
 }
 
 /*------------Navbar-------------*/
@@ -227,14 +228,23 @@ body{
     font-size: 18px;
   }
 
+  #tlogo{
+    margin-left: 35px;
+  }
+  #hlogo{
+    margin-left: 25px;
+  }
 
+  #wlogo{
+    margin-left: 25px;
+  }
   /**/
   #hlogo, #tlogo, #wlogo{
-    width: 100px;
-    height: 100px;
-    margin-left: 0px;
+    width: 130px;
+    height: 130px;
     margin-top: 30px;
   }
+
 }
 
   @media only screen and (max-width: 1600px){
@@ -243,6 +253,53 @@ body{
   }
 }
 
+@media only screen and (max-width: 1250px) {
+  .firstrow{
+    width: 100%; /*Makes girl logo and clock go to a new row at 1000 pixels*/
+  }
+}
+
+
+
+@media only screen and (max-width: 498px) {
+
+  .girl{
+    width: 200px;
+    height: 150px;
+    top: -100px;
+  }  
+  #hlogo, #tlogo, #wlogo{
+    width: 100px;
+    height: 100px;
+  }
+
+  .wcont, .hcont, .tcont {
+    width: 130px;
+    height: 130px;
+  }
+
+  .gauge-container{
+    width: 130px;
+    height: 130px;
+  }
+  #tlogo{
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+
+  #wlogo{
+    margin-top: 15px;
+    margin-left: 12px;
+  }
+  
+  #hlogo{
+    margin-left: 15px;
+  }
+  .gcont{
+    height: 200px;
+    width: 300px;
+  }
+}
 .dcontainer {
   position: absolute;
   top: 50%;

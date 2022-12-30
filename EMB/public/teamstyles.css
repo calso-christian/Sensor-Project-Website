@@ -13,11 +13,11 @@ body{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 50%;
+    margin-top: 33px;
     border: 15px solid #9282F4;
     width: 250px;
     height: 250px;
-    border-radius: 50%;
-    margin-top: 33px;
 }
 
 h1, h2, h5{
@@ -129,3 +129,10 @@ h5{
     text-decoration-line: underline;  
     text-decoration-thickness: 5px;
 } 
+
+@media screen and (max-width: 1000px) {
+    .col-md-4{
+        width: 100%;
+    }
+}
+
