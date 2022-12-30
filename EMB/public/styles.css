@@ -277,6 +277,13 @@ body{
     width: 350px;
     height: 200px;     /*eeeeeeeeeeeeeeeeeeeeeee*/
   }
+
+  .girl{
+    width: 274px;
+    height: 180px;
+    top: -100px;
+    left: 75px;
+  }  
 }
 
 
