@@ -1,5 +1,6 @@
 const params = {
     Temperature: {
+        mean: 27.44784423,
         EQ_params: {
             'amplitude': 0.4059982675211519,
             'length_scale': 80.29575199997636
@@ -34,6 +35,8 @@ const params = {
     },
 
     Humidity: {
+        mean: 84.49513213,
+
         EQ_params: {
             'amplitude': 1.2102026855081292,
             'length_scale': 127.27746115456996
@@ -67,5 +70,3 @@ const params = {
         noise: 0.1866390258689592
     }
 }
-
-
