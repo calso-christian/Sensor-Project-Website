@@ -43,6 +43,7 @@ async function forecast(data, sensor){
         y_mean: await y_mean.squeeze().array(),
         y_cov: await y_cov.squeeze().array(),
         sensor: sensor,
+        date_0: data.X.date[0]
     });
 }
 

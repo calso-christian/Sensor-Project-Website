@@ -5,7 +5,7 @@ socket.on('Forecast', async function(data) {
         const worker = new Worker('index.worker.js');
         worker.addEventListener("message", (event) => {
             let data = event.data;
-            plot_Predictions(data.X_predict, data.X, data.y, data.y_UpperCI, data.y_LowerCI, data.y_mean, data.sensor);
+            plot_Predictions(data.X_predict, data.X, data.y, data.y_UpperCI, data.y_LowerCI, data.y_mean, data.sensor, data.date_0);
             l -= 1;
             if (l == 0){
                 let element = document.getElementById("banner_loading");
