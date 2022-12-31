@@ -271,7 +271,7 @@ body{
   }
 }
 
-@media only screen and (max-width: 1400px){
+@media only screen and (max-width: 1420px){
   .gcont{
     margin-bottom: 35px;
     width: 350px;
@@ -390,7 +390,7 @@ body{
   }
 }
 
-@media only screen and (max-width: 995px) {
+@media only screen and (max-width: 1050px) {
     .gcont{
       width: 220px;
     }
@@ -404,11 +404,42 @@ body{
   .gcont{
     width: 400px;
     height: 249px;
+    font-size: 25px;
+  }
+
+  .girl{
+    width: 314px;
+    height: 220px;
+    top: -150px;
+    left: 100px
+  }
+
+  .gauge-container {
+    width: 170px;
+    height: 170px;
   }
 
   .firstrow{
     width: 100%; /*Makes girl logo and clock go to a new row at 1000 pixels*/
   }
+
+  #tlogo{
+    margin-left: 35px;
+  }
+  #hlogo{
+    margin-left: 25px;
+  }
+
+  #wlogo{
+    margin-left: 25px;
+  }
+  /**/
+  #hlogo, #tlogo, #wlogo{
+    width: 130px;
+    height: 130px;
+    margin-top: 30px;
+  }
+
 }
 
 
@@ -455,7 +486,15 @@ body{
     height: 200px;
     width: 300px;
   }
+
+  .greetings{
+    padding-left: 15px;
+  }
+
 }
+
+
+
 .dcontainer {
   position: absolute;
   top: 50%;
