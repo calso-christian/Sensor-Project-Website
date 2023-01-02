@@ -5,7 +5,6 @@ class Kernels extends Utils{
         this.RQ_params = params.RQ_params;
         this.LP_params = params.LP_params;
         this.ESS1_params = params.ESS1_params;
-        this.ESS2_params = params.ESS2_params;
         this.KL2 = this.L2_Squared(X, Y);
         this.KD = this.Difference(X, Y);
     }
@@ -17,7 +16,6 @@ class Kernels extends Utils{
                         .add(this.RationalQuadratic(this.RQ_params))
                         .add(this.LocalPeriodic(this.LP_params))
                         .add(this.ExpSinSquared(this.ESS1_params))
-                        .add(this.ExpSinSquared(this.ESS2_params))
             return K;
         });
     }

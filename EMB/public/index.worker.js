@@ -7,7 +7,6 @@ if ( 'function' === typeof importScripts) {
     importScripts("model/params.js")
     importScripts("model/Utils.js");
     importScripts("model/Kernels.js");
-    importScripts("model/model.js");
     importScripts("model/Gaussian_Process.js");
 };
 
@@ -16,8 +15,8 @@ this.onmessage = function(e) {
         await tf.ready 
         tf.setBackend('webgl');
         forecast(e.data[1], e.data[0]);
-        //let LINK = "https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Sensor%20Readings.csv";
-        //await SampleForecast(LINK, e.data[0]);
+        //let LINK = "https://raw.githubusercontent.com/calso-christian/Sensor-Project-Website/main/EMB/Temp-Hum_Laguna.csv";
+        //SampleForecast(LINK, e.data[0]);
       })();
 };
 
@@ -48,15 +47,20 @@ async function forecast(data, sensor){
 }
 
 async function SampleForecast(LINK, sensor){
-    let X = [], y = [], obj, X_predict, y_mean, y_cov, y_std;
+    let X = [], y = [], obj, X_predict, y_mean, y_cov, y_std, date_0;
     await d3.csv(LINK).then(async function(data) {
+        let _ = 0;
         for (let val of Object.values(data)) {
-            X.push([Number(val.Min)]);
+            if (_ == 0){
+                date_0 = val.Date;
+            }
+            _+=1;
+            X.push([Number(val.Hour)]);
             y.push(parseFloat(val[sensor]));
         }
         let i = X.length - 2;
         let start = X[i][0];
-        let forward = 12600;
+        let forward = 300;
         X = await tf.slice(X, 0, i).reshape([-1,1]);
         y = await tf.slice(y, 0, i).reshape([-1,1]);
         X_predict = tf.range(start, start + forward, 1).reshape([-1,1]);
@@ -77,7 +81,8 @@ async function SampleForecast(LINK, sensor){
         y_LowerCI: await  tf.squeeze(y_mean.sub(tf.mul(y_std, 2))).array(),
         y_mean: await y_mean.squeeze().array(),
         y_cov: await y_cov.squeeze().array(),
-        sensor: sensor
+        sensor: sensor,
+        date_0: date_0
     });
 };
 

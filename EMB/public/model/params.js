@@ -2,36 +2,31 @@ const params = {
     Temperature: {
         mean: 27.44784423,
         EQ_params: {
-            'amplitude': 0.4059982675211519,
-            'length_scale': 80.29575199997636
+            'amplitude': 0.6373813011143963,
+            'length_scale': 9.995175533472649
         }, 
         RQ_params: {
-            'amplitude': 2.1997367152323273,
-            'length_scale': 1270.4547009593157,
-            'scale_mixture_rate': 0.005585123651805009
+            'amplitude':  0.558617615833051,
+            'length_scale': 2.1882174011137647,
+            'scale_mixture_rate': 1.1811616163572232
         },
         LP_params: {
             EQ: {
                 'amplitude': 1.0,
-                'length_scale': 35.37919620778523
+                'length_scale': 136.435795983166
             },
             ESS: {
-                'amplitude': 0.2479375855523778,
-                'length_scale': 3.0889262852972537,
-                'period': 874.0938492521036
+                'amplitude': 0.897285077265685,
+                'length_scale': 1.9026560877083865,
+                'period': 23.527787085414282
             }
         },
         ESS1_params: {
-            'amplitude': 0.42141015970929024,
-            'length_scale': 0.25598160076711474,
-            'period': 1445.7844472709862
+            'amplitude': 1.5492509265229022,
+            'length_scale': 1.0478518822076393,
+            'period': 24.042494876690387
         },
-        ESS2_params: {
-            'amplitude': 2.37030228673647,
-            'length_scale': 2.952947687233215,
-            'period': 118.69983584904327
-        },
-        noise: 0.01598439397598398
+        noise: 0.6510730379258836
     },
 
     Humidity: {
@@ -61,11 +56,6 @@ const params = {
             'amplitude': 3.542649901974027,
             'length_scale': 1.9487199004528473,
             'period': 25751.102594339318
-        },
-        ESS2_params: {
-            'amplitude': 4.397885281535573,
-            'length_scale': 0.3386088993399477,
-            'period': 721.5814684768848
         },
         noise: 0.1866390258689592
     }
