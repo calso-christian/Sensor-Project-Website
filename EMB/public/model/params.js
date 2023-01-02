@@ -33,30 +33,30 @@ const params = {
         mean: 84.49513213,
 
         EQ_params: {
-            'amplitude': 1.2102026855081292,
-            'length_scale': 127.27746115456996
+            'amplitude': 1.0807519417788298,
+            'length_scale': 0.842530001961153
         }, 
         RQ_params: {
-            'amplitude': 1.874886190633328,
-            'length_scale': 1.0003060209116625,
-            'scale_mixture_rate': 0.0007563426457007162
+            'amplitude': 5.516337518400819,
+            'length_scale': 4.3554567062515535,
+            'scale_mixture_rate': 0.32470888476293386
         },
         LP_params: {
             EQ: {
                 'amplitude': 1.0,
-                'length_scale': 3740.758117688298
+                'length_scale': 0.8420935095455981
             },
             ESS: {
-                'amplitude': 0.6344727998440062,
-                'length_scale': 20.175453597557528,
-                'period': 2011.0499286235051
+                'amplitude': 3.116646404083355,
+                'length_scale': 0.8471833488788424,
+                'period': 1.3675993760597327
             }
         },
         ESS1_params: {
-            'amplitude': 3.542649901974027,
-            'length_scale': 1.9487199004528473,
-            'period': 25751.102594339318
+            'amplitude': 6.942784193288597,
+            'length_scale': 1.1272249183805505,
+            'period': 24.007939600308365
         },
-        noise: 0.1866390258689592
+        noise: 0.19404099209972794
     }
 }
