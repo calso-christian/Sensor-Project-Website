@@ -4,7 +4,7 @@
   }
 
 body{
-    font-family: 'Montserrat';
+    font-family: 'Montserrat' !important;
     padding-bottom: 50px;
     font-weight: bold;
   }
