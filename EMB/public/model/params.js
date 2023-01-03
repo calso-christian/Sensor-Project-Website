@@ -1,32 +1,37 @@
 const params = {
     Temperature: {
-        mean: 27.44784423,
+        mean: 28.01894273,
         EQ_params: {
-            'amplitude': 0.6373813011143963,
-            'length_scale': 9.995175533472649
+            'amplitude': 3.974286668623924,
+            'length_scale': 0.5694503701095512
         }, 
         RQ_params: {
-            'amplitude':  0.558617615833051,
-            'length_scale': 2.1882174011137647,
-            'scale_mixture_rate': 1.1811616163572232
+            'amplitude':  4.784324236425125,
+            'length_scale': 17.626573192124116,
+            'scale_mixture_rate': 0.32444319805451305
         },
         LP_params: {
             EQ: {
                 'amplitude': 1.0,
-                'length_scale': 136.435795983166
+                'length_scale': 57.15586311974351
             },
             ESS: {
-                'amplitude': 0.897285077265685,
-                'length_scale': 1.9026560877083865,
-                'period': 23.527787085414282
+                'amplitude': 5.164364163660654,
+                'length_scale': 0.15490057155175851,
+                'period': 123.94428982104303
             }
         },
         ESS1_params: {
-            'amplitude': 1.5492509265229022,
-            'length_scale': 1.0478518822076393,
-            'period': 24.042494876690387
+            'amplitude': 7.315968546025698,
+            'length_scale': 1.0961386008792473,
+            'period': 23.99967874137964
         },
-        noise: 0.6510730379258836
+        ESS2_params: {
+            'amplitude': 3.214146944403807,
+            'length_scale': 0.15071255009718262,
+            'period': 1113.1672888425144
+        },
+        noise: 0.0003407692788732758
     },
 
     Humidity: {
@@ -56,6 +61,11 @@ const params = {
             'amplitude': 6.942784193288597,
             'length_scale': 1.1272249183805505,
             'period': 24.007939600308365
+        },
+        ESS2_params: {
+            'amplitude': 1.5492509265229022,
+            'length_scale': 1.0478518822076393,
+            'period': 24.042494876690387
         },
         noise: 0.19404099209972794
     }

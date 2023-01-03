@@ -22,11 +22,11 @@ this.onmessage = function(e) {
 
 
 async function forecast(data, sensor){
-    let forward = 600;
+    let forward = 100*60;
     let start = data.X.feature[data.X.feature.length - 1] + 1;
     let X = await tf.tensor(data.X.feature).reshape([-1,1]);
     let y = await tf.tensor(data.y).reshape([-1,1])
-    let X_predict = await tf.range(start, start + forward, 1).reshape([-1,1]);
+    let X_predict = await tf.range(start, start + forward, 60).reshape([-1,1]);
     obj = new GaussianProcessRegression(params[sensor]);
     [y_mean, y_cov] = await obj.Condition(X_predict, X, y);
     y_cov = await y_cov.array();

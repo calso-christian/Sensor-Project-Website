@@ -1,6 +1,6 @@
 async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022-12-18 16:30"){
   let label = (sensor == 'Temperature')? '°C': '%';
-  const points = -20;
+  const points = -8;
   X = X.slice(points);
   y = y.slice(points);
   X = feature_to_date(X, date_0);
@@ -17,6 +17,9 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
           shape: 'spline',
           size: 3,  
         },
+        font: {
+          family: "Montserrat",
+        },
         marker: { 
           size: 6,
           color: 'rgb(219, 64, 82)'
@@ -28,6 +31,9 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         mode: 'lines+markers',
         type: 'scatter',
         name: "Forecast",
+        font: {
+          family: "Montserrat",
+        },
         line: {
             color: "rgb(0,0,0)",
             shape: 'spline',
@@ -39,9 +45,13 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
   }};
       
   let CI = {
+    
         x: X_predict.concat(X_predict.slice().reverse()), 
         y: y_LowerCI.concat(y_UpperCI.slice().reverse()),
         fill: 'toself',
+        font: {
+          family: "Montserrat",
+        },
         fillcolor: "rgba(102,0,204,0.16)", 
         type: 'scatter',
         line: {color: "transparent"}, 
@@ -53,7 +63,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         title: {
             text: sensor + ' Forecast',
             font: {
-              family: 'Secular',
+              family: "Montserrat",
               color: '#3645c8',
               size: 29
             },
@@ -64,7 +74,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
             title: {
               text: 'Date',
               font: {
-                family: 'Secular',
+                family: "Montserrat",
                 size: 22,
                 color: '#3645c8'
               }
@@ -74,7 +84,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
             title: {
               text: label,
               font: {
-                family: 'Secular',
+                family: "Montserrat",
                 size: 22,
                 color: '#3645c8'
               }
