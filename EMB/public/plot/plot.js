@@ -1,6 +1,7 @@
 async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022-12-18 16:30"){
+  console.log(date_0);
   let label = (sensor == 'Temperature')? '°C': '%';
-  const points = -8;
+  const points = -2000;
   X = X.slice(points);
   y = y.slice(points);
   X = feature_to_date(X, date_0);

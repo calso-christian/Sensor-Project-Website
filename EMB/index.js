@@ -108,8 +108,12 @@ parser.on('data', async (temp) => {
 io.on('connection', async (socket) => {
     console.log(`Someone connected. ID: ${socket.id}`);
     await Data_reader();
+    const points = 200;
+    jsonData.Temperature.X.date = jsonData.Temperature.X.date.slice(0, points);
+    jsonData.Temperature.X.feature = jsonData.Temperature.X.feature.slice(0, points);
+    jsonData.Temperature.y = jsonData.Temperature.y.slice(0, points);
     io.sockets.emit('Forecast', [jsonData, 'Temperature']);   
-    io.sockets.emit('Forecast', [jsonData, 'Humidity']);
+    //io.sockets.emit('Forecast', [jsonData, 'Humidity']);
     socket.on('disconnect', () => {
          console.log(`Someone disconnected. ID: ${socket.id}`);
     })
