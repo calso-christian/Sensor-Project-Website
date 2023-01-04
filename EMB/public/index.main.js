@@ -2,7 +2,6 @@ let l = 2;
 socket.on('Forecast', async function(data) {
     //gauge2.setValueAnimated(data.y[data.y.length - 1], 1);
     if (data[0][data[1]].X.date?.[1]){
-        console.log(data);
         const worker = new Worker('index.worker.js');
         worker.addEventListener("message", (event) => {
             let data = event.data;

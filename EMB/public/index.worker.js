@@ -22,7 +22,7 @@ this.onmessage = function(e) {
 
 
 async function forecast(data, sensor){
-    let forward = 200*60;
+    let forward = 24*60;
     let start = data.X.feature[data.X.feature.length - 1] + 1;
     let X = await tf.tensor(data.X.feature).reshape([-1,1]);
     let y = await tf.tensor(data.y).reshape([-1,1])
