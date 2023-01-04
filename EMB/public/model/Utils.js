@@ -57,7 +57,6 @@ class Utils{
             K.push(Array.from(await cholsolve(L, _)));
         }
         K = tf.tensor(K);
-        console.log(K.shape);
         return K;
     }
 
