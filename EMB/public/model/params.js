@@ -38,7 +38,7 @@ const params = {
         mean: 84.49513213,
 
         EQ_params: {
-            'amplitude': 5.289777819565801,
+            'amplitude': 1.289777819565801,
             'length_scale': 1444.6316497313776
         }, 
         RQ_params: {
@@ -49,7 +49,7 @@ const params = {
         LP_params: {
             EQ: {
                 'amplitude': 1.0,
-                'length_scale': 61.612753157095234
+                'length_scale': 800.936970511053
             },
             ESS: {
                 'amplitude': 5.548043224833015,
