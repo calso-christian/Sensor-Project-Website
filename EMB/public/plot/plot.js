@@ -51,6 +51,9 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
   let data = [CI, plot_train, plot_predict];
   let config = {responsive: true}
   let layout = {
+    font: {
+      family: "Montserrat",
+    },
         title: {
             text: sensor + ' Forecast',
             font: {

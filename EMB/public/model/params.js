@@ -42,14 +42,14 @@ const params = {
             'length_scale': 1444.6316497313776
         }, 
         RQ_params: {
-            'amplitude': 3.35225128856611,
-            'length_scale':  166.22550652719966,
-            'scale_mixture_rate': 1.0313863816383086
+            'amplitude': 0.5494297522084562,
+            'length_scale':  1.0051436539009384,
+            'scale_mixture_rate': 1.163872788101056
         },
         LP_params: {
             EQ: {
                 'amplitude': 1.0,
-                'length_scale': 61.612753157095234
+                'length_scale': 7447.936970511053
             },
             ESS: {
                 'amplitude': 5.548043224833015,
