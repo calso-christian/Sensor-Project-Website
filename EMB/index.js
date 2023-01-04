@@ -108,7 +108,7 @@ parser.on('data', async (temp) => {
 io.on('connection', async (socket) => {
     console.log(`Someone connected. ID: ${socket.id}`);
     await Data_reader();
-    await Data_truncate(550);
+    await Data_truncate(1000);
     io.sockets.emit('Forecast', [jsonData, 'Temperature']);   
     io.sockets.emit('Forecast', [jsonData, 'Humidity']);
     socket.on('disconnect', () => {
