@@ -1,6 +1,6 @@
 async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, sensor, date_0="2022-12-18 16:30"){
   let label = (sensor == 'Temperature')? '°C': '%';
-  const points = -20;
+  const points = -6;
   X = X.slice(points);
   y = y.slice(points);
   X = feature_to_date(X, date_0);
@@ -50,10 +50,13 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
   let data = [CI, plot_train, plot_predict];
   let config = {responsive: true}
   let layout = {
+    font: {
+      family: "Montserrat",
+    },
         title: {
             text: sensor + ' Forecast',
             font: {
-              family: 'Secular',
+              family: "Montserrat",
               color: '#3645c8',
               size: 29
             },
@@ -61,20 +64,28 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
             x: 0.05,
         },
         xaxis: {
+          font: {
+            family: "Montserrat",
+          },
             title: {
               text: 'Date',
               font: {
-                family: 'Secular',
+                family: "Montserrat",
                 size: 22,
                 color: '#3645c8'
               }
             },
           },
           yaxis: {
+            ticks:{
+              font: {
+                family: "Montserrat",
+              },
+            },
             title: {
               text: label,
               font: {
-                family: 'Secular',
+                family: "Montserrat",
                 size: 22,
                 color: '#3645c8'
               }

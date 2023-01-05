@@ -4,6 +4,8 @@ if ( 'function' === typeof importScripts) {
     importScripts("https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.js");
     importScripts("https://d3js.org/d3.v7.min.js");
 
+    importScripts("ext/lalolib-module.min.js");
+
     importScripts("model/params.js")
     importScripts("model/Utils.js");
     importScripts("model/Kernels.js");
@@ -22,11 +24,11 @@ this.onmessage = function(e) {
 
 
 async function forecast(data, sensor){
-    let forward = 600;
+    let forward = 24*60;
     let start = data.X.feature[data.X.feature.length - 1] + 1;
     let X = await tf.tensor(data.X.feature).reshape([-1,1]);
     let y = await tf.tensor(data.y).reshape([-1,1])
-    let X_predict = await tf.range(start, start + forward, 1).reshape([-1,1]);
+    let X_predict = await tf.range(start, start + forward, 30).reshape([-1,1]);
     obj = new GaussianProcessRegression(params[sensor]);
     [y_mean, y_cov] = await obj.Condition(X_predict, X, y);
     y_cov = await y_cov.array();

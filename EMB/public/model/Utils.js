@@ -48,9 +48,23 @@ class Utils{
     async Inverse(X)
     {
         let [Xr, Xc] = X.shape;
-        let M = math.zeros(Xr, Xc)._data;
         X = await X.array();
-        M = await math.inv(X);
+        let L = await lalolib.chol(await lalolib.array2mat(X));
+        let K = [];
+        for (let i = 0; i < Xc; i++){
+            let _ = await lalolib.zeros(Xr);
+            _[i] = 1;
+            K.push(Array.from(await lalolib.cholsolve(L, _)));
+        }
+        K = tf.tensor(K);
+        return K;
+    }
+
+    async Inverse_Direct(X)
+    {
+        let [Xr, Xc] = X.shape;
+        X = await X.array();
+        let M = await math.inv(X);
         M = tf.squeeze(tf.tensor(M));
         return M;
     }

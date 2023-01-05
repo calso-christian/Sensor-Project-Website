@@ -1,9 +1,10 @@
 {
   "name": "emb",
   "version": "1.0.0",
-  "description": "Embedded Systems Project",
+  "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ArrayFOO",
@@ -16,5 +17,8 @@
     "mongoose": "^6.8.0",
     "serialport": "^10.5.0",
     "socket.io": "^4.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }

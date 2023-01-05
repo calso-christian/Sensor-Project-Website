@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
 @font-face {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   src: url(/fonts/Montserrat-Regular.otf);
 }
 
@@ -26,7 +28,7 @@ body{
 }
 
 .current{
-  text-decoration-line: underline;  
+  text-decoration-line: underline;
   text-decoration-thickness: 5px;
 }
 
@@ -280,7 +282,7 @@ body{
     height: 180px;
     top: -100px;
     left: 75px;
-  }  
+  }
 }
 
 
@@ -314,7 +316,7 @@ body{
     height: 180px;
     top: -100px;
     left: 75px;
-  }  
+  }
 
   .gcont{
     margin-bottom: 35px;
@@ -357,12 +359,12 @@ body{
     height: 150px;
     top: -90px;
     left: 40px;
-  }  
+  }
 
   .greetings h1{
     font-size: 30px;
   }
-  
+
   .greetings{
     padding-top: 0px;
   }
@@ -455,7 +457,7 @@ body{
     height: 150px;
     top: -100px;
     left: 70px;
-  }  
+  }
 
   .date-card{
     margin-left: 30px;
@@ -483,7 +485,7 @@ body{
     margin-top: 15px;
     margin-left: 12px;
   }
-  
+
   #hlogo{
     margin-left: 15px;
   }
@@ -506,7 +508,7 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
-} 
+}
 .dash {
   margin: 0 15px;
   width: 35px;
@@ -519,7 +521,7 @@ body{
 .uno {
   margin-right: -18px;
   transform-origin: center left;
-  animation: spin 3s linear infinite;  
+  animation: spin 3s linear infinite;
 }
 
 .dos {
@@ -593,7 +595,7 @@ body{
     transform: rotate(0deg);
   }
   27% {
-    transform: rotate(0deg);  
+    transform: rotate(0deg);
   }
   40% {
     transform: rotate(180deg);
@@ -642,7 +644,7 @@ body{
   }
 }
 
-/* Responsiveness 
+/* Responsiveness
 
 @media screen and (min-width:750px){
   .gauges{
