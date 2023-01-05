@@ -19,6 +19,7 @@ let server = app.listen(process.env.PORT, "0.0.0.0", () => { //Start the server,
 let io = require('socket.io')(server); 
 
 //Send index.html page on GET /
+
 app.use(express.static('public')); 
 
 
