@@ -49,7 +49,7 @@ const params = {
         LP_params: {
             EQ: {
                 'amplitude': 1.0,
-                'length_scale': 7777.936970511053
+                'length_scale': 2000.936970511053
             },
             ESS: {
                 'amplitude': 5.548043224833015,
