@@ -7,7 +7,7 @@
 
 
 body{
-  background-color: #F8F9FF;
+  background-color: #eff2ff;
   font-family: 'Montserrat' !important;
   font-style: normal;
   width: 85%; /*if the browser gets too small, this makes sure there is still space*/
@@ -234,17 +234,21 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 800px;
+  width: 600px;
   padding: 20px;
   background: #8371F3;
   box-shadow: 0px 8px 30px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   margin-top: -25px;
+  transition: visibility 0s, opacity 0.5s linear;
+  text-align: center;
+  line-height: 36px;
 }
+
 
 .hpopup p, .tpopup p, .wpopup p{
   margin-top: 20px;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 25px;
   color: #fff;
   line-height: 36px;
@@ -254,13 +258,15 @@ body{
   margin: 15px 0px;
 }
 
-
+.popbold{
+  font-weight: 700;
+}
 .hpopup .hclose-btn, .tpopup .tclose-btn, .wpopup .wclose-btn{
   position: absolute;
   font-size: 40px;
-  top: -20px;
+  top: -10px;
   right: 10px;
-  background: #8371F3;
+  background: none;
   color: #fff;
   border: none;
   outline: none;
@@ -463,11 +469,20 @@ body.active-popup .popup{
     height: 80px;
     margin-left: 15px;
   }
+
+  .info{
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media only screen and (max-width: 1110px) {
   .gcont{
     width: 250px;
+  }
+
+  .gcont h3{
+    font-size: 22px
   }
 }
 
@@ -527,6 +542,10 @@ body.active-popup .popup{
     width: 130px;
     height: 130px;
     margin-top: 30px;
+  }
+
+  .gcont h3{
+    font-size: 25px
   }
 
 }
