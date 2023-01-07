@@ -12,6 +12,7 @@
   <script defer src="active.js"></script>
   <script defer src="drag.js"></script>
   <script defer src="time.js"></script>
+  <script defer src="popup.js"></script>
   <script src='https://cdn.jsdelivr.net/gh/bevacqua/dragula@3.7.3/dist/dragula.min.js'></script>
   </head>
 </head>
@@ -71,7 +72,7 @@
         <div class="humidity gcont col-auto dragthing">
           <div class="headcont">
             <h3>Humidity</h3>
-            <img src="logos/info button.png" onclick="togglePopup()" alt="info" width="28" height="28" id="hinfo" class="info">
+            <img src="logos/info button.png" alt="info" width="28" height="28" id="hinfo" class="info hopen-popup">
           </div>
             <div hcont>
               <div id="gauge1" class="gauge-container"></div>
@@ -82,7 +83,7 @@
         <div class="temperature gcont col-auto dragthing">
           <div class="headcont">
             <h3>Temperature</h3>
-            <img src="logos/info button.png" onclick="togglePopup()" alt="info" width="28" height="28" id="tinfo" class="info">
+            <img src="logos/info button.png" onclick="togglePopup()" alt="info" width="28" height="28" id="tinfo" class="info open-popup">
           </div>
             <div tcont>
               <div id="gauge2" class="gauge-container"></div>
@@ -93,7 +94,7 @@
         <div class="water gcont col-auto dragthing">
           <div class="headcont">
             <h3>Water</h3>
-            <img src="logos/info button.png" onclick="togglePopup()" alt="info" width="28" height="28" id="winfo" class="info">
+            <img src="logos/info button.png" onclick="togglePopup()" alt="info" width="28" height="28" id="winfo" class="info open-popup">
           </div>
             <div wcont>
               <div id="gauge3" class="gauge-container"></div>
@@ -120,11 +121,10 @@
 </div>
 
 <!-------------------Pop-up Cards--------------------->
-<div class="popup" id="temp">
-  <button class="close-btn">&times;</button>
+<div class="hpopup" id="temp">
+  <button class="hclose-btn">&times;</button>
   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur laborum nulla tempore hic ab iure exercitationem odio earum non, voluptatibus, quibusdam illum nemo sit omnis quidem, excepturi voluptate minima similique?</p>
 </div>
-
 
 <!-------------------Loading Animation--------------------->
 <nav class="navbar fixed-bottom navbar" id="banner_loading">

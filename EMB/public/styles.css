@@ -218,11 +218,18 @@ body{
   top: 0;
   right: 0;
   cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.info:hover{
+  filter: brightness(125%);
 }
 
 
+
 /*----------------------Pop-up cards----------------------*/
-.popup{
+.hpopup, .tpopup, .wpopup{
+  display: none;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -233,9 +240,12 @@ body{
   box-shadow: 0px 8px 30px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   margin-top: -25px;
+  transition: top 0ms ease-in-out 0ms, 
+              opacity 300ms ease-in-out, 
+              margin-top 300ms ease-in-out;
 }
 
-.popup p{
+.hpopup p, .tpopup p, .wpopup p{
   margin-top: 20px;
   font-weight: 400;
   font-size: 25px;
@@ -243,11 +253,15 @@ body{
   line-height: 36px;
 }
 
-.popup > * {
+.hpopup > * , .tpopup > *, .wpopup > *{
   margin: 15px 0px;
 }
 
-.popup .close-btn{
+.testite{
+  display: none;
+}
+
+.hpopup .hclose-btn, .tpopup .tclose-btn, .wpopup .wclose-btn{
   position: absolute;
   font-size: 40px;
   top: -20px;
@@ -279,6 +293,9 @@ body.active-popup .popup{
               margin-top 300ms ease-in-out;
 }
 
+.main{
+  transition: filter 0ms ease-in-out 300ms;
+}
 /*---------------------- Responsiveness ----------------------*/
 @media only screen and (max-width: 600px) {
   .firstrow{
