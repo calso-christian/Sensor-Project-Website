@@ -120,7 +120,7 @@ body{
   margin-bottom: 0;
 }
 
-.hcont, .tcont, .wcont{
+.hcont, .tcont, .wcont, .headcont{
   display: inline-flex;
 }
 
@@ -208,8 +208,78 @@ body{
   place-self: center;
 }
 
+.headcont{
+  display: flex;
+  justify-content: space-between;
+}
 
-/* Responsiveness */
+.info{
+  position: relative;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+
+/*----------------------Pop-up cards----------------------*/
+.popup{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 800px;
+  padding: 20px;
+  background: #8371F3;
+  box-shadow: 0px 8px 30px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  margin-top: -25px;
+}
+
+.popup p{
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 25px;
+  color: #fff;
+  line-height: 36px;
+}
+
+.popup > * {
+  margin: 15px 0px;
+}
+
+.popup .close-btn{
+  position: absolute;
+  font-size: 40px;
+  top: -20px;
+  right: 10px;
+  background: #8371F3;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+body.active-popup{
+  overflow: hidden;
+}
+
+body.active-popup .main{
+  filter: blur(5px);
+  background: rgba(0, 0, 0, 0.08);
+  transition:filter 0ms ease-in-out 0ms;
+}
+
+body.active-popup .popup{
+  top: 50%;
+  opacity: 1;
+  margin-top: 0px;
+  transition: top 0ms ease-in-out 0ms, 
+              opacity 300ms ease-in-out, 
+              margin-top 300ms ease-in-out;
+}
+
+/*---------------------- Responsiveness ----------------------*/
 @media only screen and (max-width: 600px) {
   .firstrow{
     width: 100%; /*Makes girl logo and clock go to a new row at 1000 pixels*/

@@ -16,6 +16,8 @@
   </head>
 </head>
 <body onload="init()">
+  <div class="main">
+  <!-------------------NavBar--------------------->
   <div class="container">
     <nav class="navbar navbar-expand-sm navbar-light">
         <button 
@@ -42,8 +44,8 @@
     </nav>
   </div>
 
-<div class="container">
-
+<div class="container"> 
+<!-------------------Greeting card + time--------------------->
   <div class="container">
     <div class="row gx-5">
       <div class="col-md-8 greetcol">
@@ -63,10 +65,14 @@
     </div>
   </div>
 
+<!-------------------Gauges--------------------->
 <div class="container">
   <div class="row gx-5 gauges gaugerow" id="dragparent">
         <div class="humidity gcont col-auto dragthing">
-          <h3>Humidity</h3>
+          <div class="headcont">
+            <h3>Humidity</h3>
+            <img src="logos/info button.png" onclick="togglePopup()" alt="info" width="28" height="28" id="hinfo" class="info">
+          </div>
             <div hcont>
               <div id="gauge1" class="gauge-container"></div>
               <img src="logos/humid.png" alt="humidity logo" width="150" height="150" id="hlogo">
@@ -74,7 +80,10 @@
         </div>
 
         <div class="temperature gcont col-auto dragthing">
-          <h3>Temperature</h3>
+          <div class="headcont">
+            <h3>Temperature</h3>
+            <img src="logos/info button.png" onclick="togglePopup()" alt="info" width="28" height="28" id="tinfo" class="info">
+          </div>
             <div tcont>
               <div id="gauge2" class="gauge-container"></div>
               <img src="logos/temp.png" alt="temperature logo" width="150" height="150"  id="tlogo">
@@ -82,7 +91,10 @@
         </div>
 
         <div class="water gcont col-auto dragthing">
-          <h3>Water</h3>
+          <div class="headcont">
+            <h3>Water</h3>
+            <img src="logos/info button.png" onclick="togglePopup()" alt="info" width="28" height="28" id="winfo" class="info">
+          </div>
             <div wcont>
               <div id="gauge3" class="gauge-container"></div>
               <img src="logos/water.png" alt="water logo" width="180" height="180"  id="wlogo">
@@ -93,8 +105,7 @@
 </div>
 
 
-
-
+<!-------------------Graphs--------------------->
 <div class="container graphs">
     <div class="graph" style="padding-right: 30px"> 
       <div id="chart-Temperature" class="container" ></div>
@@ -106,7 +117,16 @@
 </div>
 
 </div>
+</div>
 
+<!-------------------Pop-up Cards--------------------->
+<div class="popup" id="temp">
+  <button class="close-btn">&times;</button>
+  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur laborum nulla tempore hic ab iure exercitationem odio earum non, voluptatibus, quibusdam illum nemo sit omnis quidem, excepturi voluptate minima similique?</p>
+</div>
+
+
+<!-------------------Loading Animation--------------------->
 <nav class="navbar fixed-bottom navbar" id="banner_loading">
   <div class="dcontainer">
     <div class="dash uno"></div>
