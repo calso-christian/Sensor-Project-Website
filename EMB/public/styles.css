@@ -246,6 +246,10 @@ body{
   line-height: 36px;
 }
 
+.tclose-btn:hover{
+  filter: brightness(5%);
+}
+
 
 .hpopup p, .tpopup p, .wpopup p{
   margin-top: 20px;
@@ -292,6 +296,14 @@ body.active-popup .popup{
   transition: top 0ms ease-in-out 0ms, 
               opacity 300ms ease-in-out, 
               margin-top 300ms ease-in-out;
+}
+
+.table{
+  color: #fff;
+}
+
+.table td{
+  font-weight: 500;
 }
 
 .main{
@@ -506,6 +518,9 @@ body.active-popup .popup{
 }
 
 @media only screen and (max-width: 870px) { /*go back to bigger sizing*/
+  .hpopup, .tpopup, .wpopup{
+    width: 70%;
+  }
   .gcont{
     width: 400px;
     height: 249px;
