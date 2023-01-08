@@ -26,9 +26,14 @@ this.onmessage = function(e) {
 async function forecast(data, sensor){
     let forward = 24*60;
     let start = data.X.feature[data.X.feature.length - 1] + 1;
+    let date_T = data.X.date[data.X.date.length - 1];
+    let date_N = new Date();
+    date_N = date_N.getFullYear() + "-" + Number(date_N.getMonth() + 1) + "-" + date_N.getDate() + " "
+        + date_N.getHours() + ":" + date_N.getMinutes();
+    let offset = Math.floor((Math.abs(new Date(date_N) - new Date(date_T))/1000)/60);
     let X = await tf.tensor(data.X.feature).reshape([-1,1]);
     let y = await tf.tensor(data.y).reshape([-1,1])
-    let X_predict = await tf.range(start, start + forward, 30).reshape([-1,1]);
+    let X_predict = await tf.range(start + offset, start + forward + offset, 30).reshape([-1,1]);
     obj = new GaussianProcessRegression(params[sensor]);
     [y_mean, y_cov] = await obj.Condition(X_predict, X, y);
     y_cov = await y_cov.array();
