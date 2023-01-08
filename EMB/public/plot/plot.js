@@ -55,7 +55,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
   let layout = {
     grid: {rows: 1, columns: 2},
     yaxis2: {anchor: 'x2'},
-    xaxis2: {domain: [0.3, 1]},
+    xaxis2: {domain: [0.26, 1]},
     font: {
       family: "Montserrat",
     },
@@ -70,7 +70,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
             x: 0.05,
         },
         xaxis: {
-          domain: [0, 0.3],
+          domain: [0, 0.2],
           font: {
             family: "Montserrat",
           },
