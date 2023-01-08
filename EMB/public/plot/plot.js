@@ -18,7 +18,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
           size: 3,  
         },
         marker: { 
-          size: 6,
+          size: 10,
           color: 'rgb(219, 64, 82)'
   }};
   let plot_predict = {
@@ -75,7 +75,6 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
             family: "Montserrat",
           },
             title: {
-              text: 'Date',
               font: {
                 family: "Montserrat",
                 size: 22,
