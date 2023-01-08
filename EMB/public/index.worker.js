@@ -40,6 +40,10 @@ async function forecast(data, sensor){
     y_cov = y_cov.map(x => x.map( x => x || 0));
     y_cov = tf.tensor(y_cov);
     y_std = tf.sqrt(obj.getDiag(y_cov, y_cov.shape[0]));
+    if (sensor == 'Humidity'){
+        y_mean = y_mean.minimum(tf.scalar(100)).maximum(tf.scalar(0));
+        y_std = y_std.minimum(tf.scalar(50)).maximum(tf.scalar(0));
+    }
     self.postMessage( {
         X_predict: await X_predict.squeeze().array(),
         X: await X.squeeze().array(),
