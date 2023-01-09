@@ -38,35 +38,35 @@ const params = {
         mean: 84.49513213,
 
         EQ_params: {
-            'amplitude': 4.224714453753487,
-            'length_scale': 4063.798685274997
+            'amplitude': 4.693120850943487,
+            'length_scale': 1887.58079831243
         }, 
         RQ_params: {
-            'amplitude': 3.29142994773155,
-            'length_scale':  0.48791084253642586,
-            'scale_mixture_rate': 2.622885544754414
+            'amplitude': 3.232905040095639,
+            'length_scale':  0.9976136712985867,
+            'scale_mixture_rate': 1.0019557279138211
         },
         LP_params: {
             EQ: {
                 'amplitude': 1.0,
-                'length_scale': 231.29869545954793
+                'length_scale': 199.74911098641678
             },
             ESS: {
-                'amplitude': 6.351699776129822,
-                'length_scale': 3.1290132963808444,
-                'period': 368.951350363181
+                'amplitude': 5.9096089955759785,
+                'length_scale': 3.079703016481915,
+                'period': 333.4830122708313
             }
         },
         ESS1_params: {
-            'amplitude': 7.233834073467068,
-            'length_scale': 1.089004407150815,
-            'period': 1440.497439661111
+            'amplitude': 7.56281710218034,
+            'length_scale': 1.1967806844692919,
+            'period': 1439.9786671345491
         },
         ESS2_params: {
-            'amplitude': 2.4454904348922835,
-            'length_scale': 0.3737455107939061,
-            'period': 22549.780499273795
+            'amplitude': 2.238136328344902,
+            'length_scale': 0.3858972853543161,
+            'period': 22465.190263066208
         },
-        noise: 0.0001564350709687784
+        noise: 4.3217978393131913e-07
     }
 }

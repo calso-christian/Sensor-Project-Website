@@ -97,5 +97,3 @@ async function SampleForecast(LINK, sensor){
         date_0: date_0
     });
 };
-
-

@@ -11,7 +11,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         hovertemplate: '%{y:.2f}' + label + '<extra></extra>',
         mode: 'lines+markers',
         type: 'scatter',
-        name: "Reading",
+        name: "Observations",
         line: {
           color: "rgb(0,0,0)",
           shape: 'spline',
@@ -50,7 +50,7 @@ async function plot_Predictions(X_predict, X, y, y_UpperCI, y_LowerCI, y_mean, s
         xaxis: 'x2',
         yaxis: 'y2',
   };
-  let data = [CI, plot_train, plot_predict];
+  let data = [plot_train, plot_predict, CI];
   let config = {responsive: true}
   let layout = {
     grid: {rows: 1, columns: 2},
