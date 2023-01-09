@@ -56,22 +56,22 @@
     <div class="row gx-5">
       <div class="col-md-8 greetcol">
           <!-------------------Carousel--------------------->
-        <div class="carousel slide" id="myslider"  data-bs-ride="carousel">
+        <div class="carousel slide carousel-fade" id="myslider" data-bs-ride="carousel">
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#myslider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#myslider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#myslider" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
           <div class="carousel-inner">
-              <div class="greetings carousel-item active">
+              <div class="greetings carousel-item active" id="slide1">
                   <h1>Greetings, Array Foo!</h1>
                   <p>Welcome to your dashboard, where you can monitor your home’s condition in real-time.</p>
               </div>
-              <div class="greetings carousel-item" >
+              <div class="greetings carousel-item" id="slide2">
                   <h1>Gauges</h1>
                   <p>With the live gauges, you can keep track of your home's humidty, temperature and water levels!</p>
               </div>
-              <div class="greetings carousel-item">
+              <div class="greetings carousel-item" id="slide3">
                 <h1>Graphs</h1>
                 <p>You can also view the data with the help of the graphs! You can zoom in and out, pan through, and take a snapshot of the plots!</p>
             </div>
@@ -183,7 +183,7 @@
 </div>
 
 <div class="tpopup">
-  <button class="tclose-btn">X</button>
+  <button class="tclose-btn">x</button>
   <p><span class="popbold">💡Temperature:</span> Maintaining a comfortable temperature can help to prevent a room from feeling too hot or too cold, making it cozier and more preferable to stay at.</p>
   <table class="table table-bordered table-hover">
     <thead>
