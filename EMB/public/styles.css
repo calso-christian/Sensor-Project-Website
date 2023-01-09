@@ -45,6 +45,7 @@ body{
   transition: all 0.3s ease 0s;
   animation: pop 0.3s linear 1;
   padding-bottom: 18px;
+  height: 200px;
 }
 .greetings h1{
   font-weight: 700;

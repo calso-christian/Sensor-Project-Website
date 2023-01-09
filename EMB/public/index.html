@@ -47,14 +47,38 @@
 
 <div class="container"> 
 <!-------------------Greeting card + time--------------------->
+
+
+       
+  
   <div class="container">
     <div class="row gx-5">
       <div class="col-md-8 greetcol">
-        <div class="greetings">
-            <h1>Greetings, Array Foo!</h1>
-            <p>Welcome to your dashboard. Monitor your home’s condition in real-time.</p>
+          <!-------------------Carousel--------------------->
+        <div class="carousel slide" id="myslider"  data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+          <div class="carousel-inner">
+              <div class="greetings carousel-item active">
+                  <h1>Greetings, Array Foo!</h1>
+                  <p>Welcome to your dashboard, where you can monitor your home’s condition in real-time.</p>
+              </div>
+              <div class="greetings carousel-item" >
+                  <h1>Gauges</h1>
+                  <p>With the live gauges, you can keep track of your home's humidty, temperature and water levels!</p>
+              </div>
+              <div class="greetings carousel-item">
+                <h1>Graphs</h1>
+                <p>You can also view the data with the help of the graphs! You can zoom in and out, pan through, and take a snapshot of the plots!</p>
+            </div>
+            </div>
+           
+          </div>
         </div>
-      </div>
+
 
       <div class="col-md-4 firstrow">
         <div class="date-card">
@@ -64,7 +88,6 @@
         </div>
       </div>
     </div>
-  </div>
 
 <!-------------------Gauges--------------------->
 <div class="container">
@@ -117,6 +140,7 @@
     </div>
 </div>
 
+</div>
 </div>
 </div>
 
