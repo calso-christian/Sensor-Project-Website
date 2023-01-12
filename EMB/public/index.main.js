@@ -18,15 +18,80 @@ socket.on('Forecast', async function(data) {
 
 socket.on('temp-update', async (data) => {
     gauge2.setValueAnimated(data,1);
+
+    if(data <= 26 && data >= 24) {
+        var stats = document.getElementById("temp-stats");
+        stats.innerHTML = "Temperature: Normal";
+        stats.style.color = "#5ee432";
+      }
+      else if(data < 24) {
+        var stats = document.getElementById("temp-stats");
+        stats.innerHTML = "Temperature: Cold";
+        stats.style.color = "#549ded";
+      }
+      else if(data > 26 && data < 40) {
+        var stats = document.getElementById("temp-stats");
+        stats.innerHTML = "Temperature: Hot";
+        stats.style.color = "#f7aa38";
+      }else {
+        var stats = document.getElementById("temp-stats");
+        stats.innerHTML = "Temperature: Warning! Dangerous Level";
+        stats.style.color = "#ef4655";
+      } 
+
 })
 
 socket.on('hum-update', async (data) => {
+
     gauge1.setValueAnimated(data,1);
+    
+    if(data < 70 && data > 50) {
+        var stats = document.getElementById("hum-stats");
+        stats.innerHTML = "Humidity: Risk";
+        stats.style.color = "#fffa50";
+      }
+      else if(data >= 70 && data <= 90) {
+        var stats = document.getElementById("hum-stats");
+        stats.innerHTML = "Humidity: Normal";
+        stats.style.color = "#5ee432";
+      }
+      else if(data > 90) {
+        var stats = document.getElementById("hum-stats");
+        stats.innerHTML = "Humidity: Warning! ";
+        stats.style.color = "#f7aa38";
+      }
+      else {
+        var stats = document.getElementById("hum-stats");
+        stats.innerHTML = "Humidity: Warning! Dangerous Level";
+        stats.style.color = "#ef4655";
+      }
 })
 
-var waterAlerted;
+
 socket.on('wat-update', async (data) => {
     gauge3.setValueAnimated(data,1);
+    
+    if(data < 200) {
+        var stats = document.getElementById("water-stats");
+        stats.innerHTML = "Water: Normal";
+        stats.style.color = "#5ee432";
+    }
+    else if(data > 400 && data < 600) {
+        var stats = document.getElementById("water-stats");
+        stats.innerHTML = "Water: Normal with Risk";
+        stats.style.color = "#fffa50";
+    }
+    else if(data > 600) {
+        var stats = document.getElementById("water-stats");
+        stats.innerHTML = "Water: WARNING! Dangerous Level";
+        stats.style.color = "#ef4655";
+    }
+    
 })
+
+/*async (data, id) => {
+        var stats = document.getElementById(id);
+        stats.innerHTML = id;
+} */
 
 

@@ -126,10 +126,10 @@ io.on('connection', async (socket) => {
 
         io.sockets.emit('temp-update', Math.floor(Math.random()*100));
         io.sockets.emit('hum-update', Math.floor(Math.random()*90));
-        io.sockets.emit('wat-update', Math.floor(400));
+        io.sockets.emit('wat-update', Math.floor(Math.random()*100));
     
 
-    }, 3000)
+    }, 1000)
 
     socket.on('disconnect', () => {
          console.log(`Someone disconnected. ID: ${socket.id}`);
