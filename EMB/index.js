@@ -58,6 +58,7 @@ parser.on('data', async (temp) => {
     let obj = JSON.parse(temp);
     let passTemp = obj["Temperature"];
     let passHum = obj["Humidity"];
+    let passWat = obj["Water"];
 
     console.log(obj);
     
@@ -123,8 +124,10 @@ io.on('connection', async (socket) => {
     
     setInterval(() => {
 
-        io.sockets.emit('temp-update', Math.floor(Math.random()*50));
-        io.sockets.emit('hum-update', Math.floor(Math.random()*50));
+        io.sockets.emit('temp-update', Math.floor(Math.random()*100));
+        io.sockets.emit('hum-update', Math.floor(Math.random()*90));
+        io.sockets.emit('wat-update', Math.floor(400));
+    
 
     }, 3000)
 

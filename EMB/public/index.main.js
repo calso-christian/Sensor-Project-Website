@@ -24,4 +24,9 @@ socket.on('hum-update', async (data) => {
     gauge1.setValueAnimated(data,1);
 })
 
+var waterAlerted;
+socket.on('wat-update', async (data) => {
+    gauge3.setValueAnimated(data,1);
+})
+
 
