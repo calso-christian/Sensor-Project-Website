@@ -239,7 +239,7 @@ body{
   filter: brightness(125%);
 }
 
-.carousel-item p{
+.carousel-item .stats{
   line-height: 28px;
   font-size: 22px;
 }
