@@ -28,10 +28,11 @@ body{
   color: #9282F4;
 }
 
-.current{
+.nav-link[aria-current="page"]{
   text-decoration-line: underline;
   text-decoration-thickness: 5px;
 }
+
 
 /*------------Greetings Card-------------*/
 .greetings{
@@ -518,11 +519,14 @@ body.active-popup .popup{
 }
 
 @media only screen and (max-width: 1050px) {
+  .date-card .date{
+    font-size: 19px;
+  }
   .carousel-item{
     height: 230px;
   }
     .gcont{
-      width: 220px;
+      width: 200px;
     }
     .gauge-container{
       width: 90px;
@@ -536,6 +540,25 @@ body.active-popup .popup{
     .date-card h1{
       font-size: 38px;
     }
+
+    .carousel{
+      margin-bottom: 30px;
+    }
+    #hlogo, #tlogo{
+      margin-top: 20px;
+    }
+    
+    #wlogo{
+      margin-top: 18px;
+    }
+    #hlogo, #tlogo{
+      width: 60px;
+      height: 60px;
+    }
+    #wlogo{
+      width: 63px;
+      height: 60px;
+    }
 }
 
 @media only screen and (max-width: 870px) { /*go back to bigger sizing*/
@@ -546,9 +569,7 @@ body.active-popup .popup{
     width: 70%;
   }
   .gcont{
-    width: 400px;
-    height: 249px;
-    font-size: 25px;
+    width: 200px;
   }
 
   .girl{
@@ -558,9 +579,9 @@ body.active-popup .popup{
     left: 100px
   }
 
-  .gauge-container {
-    width: 170px;
-    height: 170px;
+  .gauge-container{
+    width: 90px;
+    height: 90px;
   }
 
   .firstrow{
