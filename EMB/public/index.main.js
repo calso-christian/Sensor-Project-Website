@@ -71,17 +71,17 @@ socket.on('hum-update', async (data) => {
 socket.on('wat-update', async (data) => {
     gauge3.setValueAnimated(data,1);
     
-    if(data < 200) {
+    if(data < 20) {
         var stats = document.getElementById("water-stats");
         stats.innerHTML = "Water: Normal";
         stats.style.color = "#5ee432";
     }
-    else if(data > 400 && data < 600) {
+    else if(data > 40 && data < 60) {
         var stats = document.getElementById("water-stats");
         stats.innerHTML = "Water: Normal with Risk";
         stats.style.color = "#fffa50";
     }
-    else if(data > 600) {
+    else if(data > 60) {
         var stats = document.getElementById("water-stats");
         stats.innerHTML = "Water: WARNING! Dangerous Level";
         stats.style.color = "#ef4655";
