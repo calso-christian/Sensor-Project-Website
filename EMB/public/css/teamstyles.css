@@ -12,7 +12,9 @@ body{
     padding-bottom: 50px;
     font-weight: bold;
   }
-
+.navbar{
+    margin-top: 28px;
+}
 .img1 img{
     position: relative;
     display: block;
@@ -132,7 +134,6 @@ h5{
     transform: translateY(-3px);
     color: #9282F4;
 }
-
 
 
 .nav-link[aria-current="page"]{
