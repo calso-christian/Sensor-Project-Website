@@ -239,6 +239,10 @@ body{
   filter: brightness(125%);
 }
 
+.carousel-item p{
+  line-height: 28px;
+  font-size: 22px;
+}
 
 
 /*----------------------Pop-up cards----------------------*/
@@ -522,11 +526,18 @@ body.active-popup .popup{
   .date-card .date{
     font-size: 19px;
   }
+  .carousel-item p{
+    line-height: 36px;
+  }
+  #dragparent{
+    margin-top: 10px;
+  }
   .carousel-item{
     height: 230px;
   }
     .gcont{
       width: 200px;
+      height: 140px;
     }
     .gauge-container{
       width: 90px;
