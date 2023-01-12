@@ -519,6 +519,9 @@ body.active-popup .popup{
 }
 
 @media only screen and (max-width: 1050px) {
+  .date-card .date{
+    font-size: 19px;
+  }
   .carousel-item{
     height: 230px;
   }
