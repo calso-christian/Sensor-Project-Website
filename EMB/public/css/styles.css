@@ -28,10 +28,11 @@ body{
   color: #9282F4;
 }
 
-.current{
+.nav-link[aria-current="page"]{
   text-decoration-line: underline;
   text-decoration-thickness: 5px;
 }
+
 
 /*------------Greetings Card-------------*/
 .greetings{
